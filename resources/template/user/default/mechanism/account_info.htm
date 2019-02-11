@@ -1,0 +1,115 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.accountId" value="0">
+<block id="accountData" name="MechanismAccount" accountId=0 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">基础资料-新账户</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="accountId" value="{$accountData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$accountData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+			  
+            <block id="bankcardtList" name="MechanismBankcard" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">托管银行</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="bank_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="bankcardt" name="bankcardtList.data">
+                    <option value="{$bankcardt.identity}"<eq name="$technicalData['data']['bank_identity']" value="$bankcardt['identity']"> selected="selected"</eq>>{$bankcardt.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+			  
+            <block id="typologicalList" name="MechanismTypological" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">账户类型</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="typological_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="typological" name="typologicalList.data">
+                    <option value="{$typological.identity}"<eq name="$technicalData['data']['typological_identity']" value="$typological['identity']"> selected="selected"</eq>>{$typological.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">号码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" required value="{$accountData.data.code}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">余额</label>
+              <div class="col-sm-6">
+                <input type="text" name="amount" required value="{$accountData.data.amount}" placeholder="余额" class="form-control">
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$accountData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/mechanism/account.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/default/mechanism/account_add.js"></script>
+<template file="/footer" />

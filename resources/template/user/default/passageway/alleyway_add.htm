@@ -1,0 +1,100 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.alleywayId" value="0">
+<block id="alleywawyData" name="PassagewayAlleyway" alleywayId=0 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">渠道-新渠道</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="alleywawyId" value="{$alleywawyData.data.identity}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" id="title" name="title" value="{$alleywawyData.data.title}" required placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <block id="roleList" name="PassagewayChannel" perpage=-1 />
+            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">渠道分类</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="channel_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="role" name="roleList.data">
+                    <lt name="$role.role_identity" value="1">
+                    <option value="{$role.identity}"<eq name="$alleywawyData['data']['role_identity']" value="$role['identity']"> selected="selected"</eq>>{$role.title}</option>
+                    <volist id="subRole" name="roleList.data">
+                    <eq name="$subRole['role_identity']" value="$role['identity']">
+                    <option value="{$subRole.identity}"<eq name="$alleywawyData['data']['role_identity']" value="$subRole['identity']"> selected="selected"</eq>>|---{$subRole.title}</option>
+                    </eq>
+                    </volist>
+                    </lt>
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">介绍</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="content" rows="10">{$alleywawyData[data][content]|doc}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="3">{$alleywawyData[data][remark]|doc}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/passageway/alleyway.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/passageway/alleyway_admin.js"></script>
+<template file="/footer" />

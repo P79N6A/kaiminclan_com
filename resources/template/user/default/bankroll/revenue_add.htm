@@ -1,0 +1,111 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.revenueId" value="0">
+<block id="revenueData" name="BankrollRevenue" revenueId=0 start=1 perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">转入管理-新转入</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="revenueId" value="{$revenueData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$revenueData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">金额</label>
+              <div class="col-sm-6">
+                <input type="text" name="amount" required value="{$revenueData.data.amount}" placeholder="金额" class="form-control">
+              </div>
+            </div>
+
+            <block id="accountList" name="BankrollAccount" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">账户</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="account_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="account" name="accountList.data">
+                    <option value="{$account.identity}"<eq name="$revenueData['data']['account_identity']" value="$broker['identity']"> selected="selected"</eq>>{$account.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+
+            <block id="subjectList" name="BankrollSubject" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">科目</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="subject_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="subject" name="subjectList.data">
+                    <option value="{$subject.identity}"<eq name="$revenueData['data']['subject_identity']" value="$broker['identity']"> selected="selected"</eq>>{$subject.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$revenueData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/bankroll/revenue.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/bankroll/revenue_admin.js"></script>
+<script type="text/javascript">
+
+</script>
+<template file="/footer" />

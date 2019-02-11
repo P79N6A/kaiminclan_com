@@ -1,0 +1,8 @@
+/* CSS Document */
+
+html,body { background:#eeeeee; }
+
+.content { width:780px; padding-right:20px; }
+.item { background:#fff; margin-bottom:15px; padding:20px; }
+.item a { color:#666; }
+.item a h1 { font-size:18px; font-weight:bold; text-align:left; padding-bottom:10px;  }

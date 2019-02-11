@@ -1,0 +1,128 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">	主题管理</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+		  <div class="dataTables_length" id="table2_length">
+		  <label>Show <div class="select2-container" id="s2id_autogen3">
+		  <a href="javascript:void(0)" class="select2-choice" tabindex="-1">   
+		  <span class="select2-chosen" id="select2-chosen-4">10</span>
+		  <abbr class="select2-search-choice-close"></abbr>   
+		  <span class="select2-arrow" role="presentation">
+		  <b role="presentation"></b>
+		  </span>
+		  </a>
+		  <label for="s2id_autogen4" class="select2-offscreen"></label>
+		  <input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-4" id="s2id_autogen4">
+		  <div class="select2-drop select2-display-none">   
+			  <div class="select2-search select2-search-hidden select2-offscreen">      
+			  <label for="s2id_autogen4_search" class="select2-offscreen"></label>       
+			  <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-4" id="s2id_autogen4_search" placeholder="">   </div>   
+			  <ul class="select2-results" role="listbox" id="select2-results-4">   </ul>
+		  </div>
+		  </div>
+		  <select name="table2_length" aria-controls="table2" class="select2-offscreen" tabindex="-1" title="">
+			  <option value="10">10</option>
+			  <option value="25">25</option>
+			  <option value="50">50</option>
+			  <option value="100">100</option>
+		  </select> 
+		  entries</label>
+		  </div>
+		  <div id="table2_filter" class="dataTables_filter">
+			<label>Search:<input type="search" class="" placeholder="" aria-controls="table2"></label>
+		  </div>
+			  <block id="themeList" name="QuotationInvaluable" start=1 perpage=10 />
+		  <table class="table table-striped dataTable no-footer" id="table2" role="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr role="row">
+				 <th style="width: 80px;"><input type="checkbox" id="click_button_checkall" />全选</th>
+				 <th style="width: 272px;">名称</th>
+				 <th style="width: 415px;">状态</th>
+				 <th style="width: 400px;">时间</th>
+                 </tr>
+              </thead>
+              <tbody>
+			  <eq name="$themeList.total" value="0">
+              <tr class="gradeA odd" role="row">
+                    <td colspan="4">没有数据</td>
+                 </tr>
+			  <else />
+			  <volist id="theme" name="themeList.data">
+              <tr class="gradeA odd" role="row">
+					<td><input type="checkbox" class="checkitem" value="{$tempalte.identity}" /></td>
+                    <td class="sorting_1">{$theme.title}</td>
+                    <td>{$theme.status.label}</td>
+                    <td>{$theme['dateline']|formatdate}</td>
+                 </tr>
+			</volist>
+			</eq>
+                 </tbody>
+           </table>
+		   <php>$themeData = $this->page($themeList['total'],$themeList['pertheme'],$themeList['start']);</php>
+		   <div class="dataTables_info" id="table2_info" role="status" aria-live="polite">Showing {$themeList.start} to {$themeList.pertheme} of {$themeList.total} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$themeData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$themeData['first']['url']}">First</a>
+            </gt>
+                <gt name="themeData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$themeData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="themeData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$themeData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$themeData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$themeData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$themeData['last']['url']}">Last</a>
+               </gt>
+           </div>
+		   </div>
+          </div><!-- table-responsive -->
+
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+</section>
+<script type="text/javascript" src="/js/1.0/template/theme.js"></script>
+<template file="/footer" />

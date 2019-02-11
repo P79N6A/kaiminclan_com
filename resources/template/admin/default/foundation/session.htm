@@ -1,0 +1,83 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">会话</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+			<block id="registryData" name="FoundationRegistry" bz="attachment" />
+		
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+			
+              <div id="basicWizard" class="basic-wizard">
+
+			
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[attachment][title]" placeholder="标题" value="{$registryData.data.title}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">有效期</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[attachment][lifetime]" placeholder="有效期" value="{$registryData.data.lifetime}" class="form-control">
+              </div>
+            </div>
+                  </div>
+                  
+                </div><!-- tab-content -->
+
+            
+            
+           
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <button type="reset" class="btn btn-default">重置</button>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/foundation/session.js"></script>
+<template file="/footer" />

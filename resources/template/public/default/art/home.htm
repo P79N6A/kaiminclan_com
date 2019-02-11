@@ -1,0 +1,59 @@
+<template file="top" />
+<link rel="stylesheet" href="/css/stock/home.css"/>
+
+<title>证券在线 </title>
+</head>
+
+<body>
+<template file="menu" />
+<div class="box clearfix">
+	<div class="home fn_left">
+		<block id="newsList" name="IntelligenceDocumentation" catalogueId=46 start=1 perpage=20 />
+		<volist id="news" name="newsList.data">
+		<div class="item">
+			<a href="/art/view_{$news.identity}.html" target="_blank">
+			<h1>{$news.title}</h1>
+			<p>{$news.summary}</p>
+			</a>
+			
+			<ul>
+				<li>
+				时间:{$news['dateline']|formatdate}
+				</li>
+			</ul>
+		</div>
+		</volist>
+	</div>
+	<div class="topic fn_left">
+	<div>分红</div>
+    <block id="newsList" name="IntelligenceDocumentation" catalogueId=43 start=1 perpage=10 />
+    <volist id="news" name="newsList.data">
+    <div class="item">
+    	<a href="/art/view_{$news.identity}.html" target="_blank">
+    	<h1>{$news.title}</h1>
+        </a>
+    </div>
+    </volist>
+	<div>回购</div>
+    <block id="newsList" name="IntelligenceDocumentation" catalogueId=42 start=1 perpage=10 />
+    <volist id="news" name="newsList.data">
+    <div class="item">
+    	<a href="/art/view_{$news.identity}.html" target="_blank">
+    	<h1>{$news.title}</h1>
+        </a>
+    </div>
+    </volist>
+	</div>
+	<div class="sidebar fn_right">
+	<div>公告</div>
+    <block id="newsList" name="IntelligenceDocumentation" catalogueId=45 start=1 perpage=10 />
+    <volist id="news" name="newsList.data">
+    <div class="item">
+    	<a href="/art/view_{$news.identity}.html" target="_blank">
+    	<h1>{$news.title}</h1>
+        </a>        
+    </div>
+    </volist>
+	</div>
+</div>
+<template file="bottom" />

@@ -1,0 +1,156 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.productId" value="0">
+<block id="productData" name="MaterialProduct" productId=0 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">组织机构-新产品</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="productId" value="{$productData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">编码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" required value="{$productData.data.code}" placeholder="编码" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$productData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <block id="catalogList" name="IntercalateExchange" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">交易所</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="exchange_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalog" name="catalogList.data">
+                    <option value="{$catalog.identity}"<eq name="$productData['data']['exchange_identity']" value="$catalog['identity']"> selected="selected"</eq>>{$catalog.title}</option>
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <block id="catalogList" name="MaterialCatalog" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">目录</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="category_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalog" name="catalogList.data">
+                    <option value="{$catalog.identity}"<eq name="$productData['data']['category_identity']" value="$catalog['identity']"> selected="selected"</eq>>{$catalog.title}</option>
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">交易单位</label>
+              <div class="col-sm-6">
+                <input type="text" name="trade_unit" required value="{$productData.data.trade_unit}" placeholder="交易单位" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">报价单位	</label>
+              <div class="col-sm-6">
+                <input type="text" name="quotation_unit" required value="{$productData.data.quotation_unit}" placeholder="报价单位" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">最小变动价位</label>
+              <div class="col-sm-6">
+                <input type="text" name="min_variable_price" required value="{$productData.data.min_variable_price}" placeholder="最小变动价位" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">合约月份</label>
+              <div class="col-sm-6">
+                <input type="text" name="contract_month" required value="{$productData.data.contract_month}" placeholder="合约月份" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">最后交易日</label>
+              <div class="col-sm-6">
+                <input type="text" name="last_trade_day" required value="{$productData.data.last_trade_day}" placeholder="最后交易日" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">最后交割日</label>
+              <div class="col-sm-6">
+                <input type="text" name="last_delivery_day" required value="{$productData.data.last_delivery_day}" placeholder="最后交割日" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">最低交易保证金</label>
+              <div class="col-sm-6">
+                <input type="text" name="bail" required value="{$productData.data.bail}" placeholder="最低交易保证金" class="form-control">
+              </div>
+            </div>
+            
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$productData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/material/product.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/material/product_add.js"></script>
+<template file="/footer" />

@@ -1,0 +1,36 @@
+网站管理
+
+系统工具 facility
+	任务计划mission
+	事件查看incident
+	设备equipment
+	系统配置registry
+存储
+	内存
+	硬盘
+	数据库
+	FTP
+页面pagination
+	页面
+	布局
+	模板
+	模块
+账户与权限authority
+	角色
+	权限
+消息中心Messenger
+	模版
+	消息
+服务和应用程序program
+	应用
+	服务
+	页面
+	更新
+安全中心security
+	备份backup
+	还原reduction
+	敏感词keenness
+	关键字keyword
+	访客visitor
+	设备equipment
+	身份clientip

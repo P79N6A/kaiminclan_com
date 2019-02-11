@@ -1,0 +1,60 @@
+<template file="/header" />
+<section>
+  
+    <div class="signinpanel">
+        
+        <div class="row">
+            
+            <div class="col-md-7">
+                
+                <div class="signin-info">
+                    <div class="logopanel">
+                        <h1><span>[</span> {$copyright.company} <span>]</span></h1>
+                    </div><!-- logopanel -->
+                
+                    <div class="mb20"></div>
+                
+                    <h5><strong>技术创造美好生活</strong></h5>
+                    <ul>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 外汇</li>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 证券</li>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 债券</li>
+                        <li><i class="fa fa-arrow-circle-o-right mr5"></i> 大宗</li>
+                    </ul>
+                    <div class="mb20"></div>
+                    <strong>还没有帐号? <a href="/admin/signup.html">注册</a></strong>
+                </div><!-- signin0-info -->
+            
+            </div><!-- col-sm-7 -->
+            
+            <div class="col-md-5">
+                
+                <form method="post" id="baseForm">
+                    <h4 class="nomargin">账户登录</h4>
+                
+                    <input type="text" class="form-control uname" name="username" required="required" placeholder="账户名称/手机号码/电子邮件" />
+                    <input type="password" class="form-control pword" name="password" required="required" placeholder="账户密码" />
+                    <input type="hidden" name="returnUrl" value="{$location.fromUrl}" />
+                    <a href="/forgot.html"><small>忘记密码?</small></a>
+                    <button type="submit" class="btn btn-success btn-block">登录</button>
+                    
+                </form>
+            </div><!-- col-sm-5 -->
+            
+        </div><!-- row -->
+        
+        <div class="signup-footer">
+            <div class="pull-left">
+                &copy; 2014. All Rights Reserved. {$copyright.company}
+            </div>
+            <div class="pull-right">
+                Created By: <a href="http://www.kaiminclan.com/" target="_blank"> {$copyright.company}</a>
+            </div>
+        </div>
+        
+    </div><!-- signin -->
+  
+</section>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/passport/admin_login.js"></script>
+<template file="/footer" />

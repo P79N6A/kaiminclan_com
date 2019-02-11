@@ -1,0 +1,156 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.stockId" value="0">
+<block id="stockData" name="SecuritiesStock" stockId=0 perpage=1 status="-1" />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">股票管理-新股票</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="stockId" value="{$stockData.data.identity}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">代码</label>
+              <div class="col-sm-6">
+                <input type="text" id="symbol" name="symbol" value="{$stockData.data.symbol}" required placeholder="代码" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" id="title" name="title" value="{$stockData.data.title}" required placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">英文名称</label>
+              <div class="col-sm-6">
+                <input type="text" id="english" name="english" value="{$stockData.data.english}" required placeholder="英文名称" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">初次上市</label>
+              <div class="col-sm-6">
+                <input type="text" id="ipo_date" name="ipo_date" value="{$stockData[data][ipo_date]|fdate}" required placeholder="初次上市" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">全称</label>
+              <div class="col-sm-6">
+                <input type="text" id="fullname" name="fullname" value="{$stockData.data.fullname}" required placeholder="全称" class="form-control">
+              </div>
+            </div>
+            <block id="exchangeList" name="IntercalateExchange" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">交易所</label>
+              <div class="col-sm-3">
+                <select class="select2" name="exchange_identity" data-placeholder="Choose One" required>
+                  <volist id="exchange" name="exchangeList.data">
+                    <option value="{$exchange.identity}"<eq name="$stockData['data']['exchange_identity']" value="$exchange['identity']"> selected="selected"</eq>>{$exchange.title}</option>
+
+                  </volist>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-3 control-label">行业</label>
+              <div class="col-sm-6" id="industry-box">
+                <div class="col-sm-3">
+                  <select class="select2 first" name="first_industry_identity" data-value="{$stockData.data.first_industry_identity}"></select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="select2 second" name="second_industry_identity" data-value="{$stockData.data.second_industry_identity}"></select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="select2 third" name="third_industry_identity" data-value="{$stockData.data.third_industry_identity}"></select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="select2 fourth" name="fourth_industry_identity" data-value="{$stockData.data.fourth_industry_identity}"></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">区域</label>
+              <div class="col-sm-6" id="district-box">
+                <div class="col-sm-3">
+                  <select class="select2 continent" name="continent_district_identity" data-value="{$stockData.data.continent_district_identity}"></select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="select2 region" name="region_district_identity" data-value="{$stockData.data.region_district_identity}"></select>
+                </div>
+                <div class="col-sm-3">
+                  <select class="select2 country" name="country_district_identity" data-value="{$stockData.data.country_district_identity}"></select>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">详细地址</label>
+              <div class="col-sm-6">
+                <input type="text" id="registered_address" name="registered_address" value="{$stockData.data.registered_address}" required placeholder="注册地址" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">办公地址</label>
+              <div class="col-sm-6">
+                <input type="text" id="office_address" name="office_address" value="{$stockData.data.office_address}" required placeholder="办公地址" class="form-control">
+              </div>
+            </div>
+            
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">业务范围</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="business" rows="5">{$stockData.data.business}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/securities/stock.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/cxselect/jquery.cxselect.min.js"></script>
+<script src="/js/1.0/securities/stock_add.js"></script>
+<template file="/footer" />

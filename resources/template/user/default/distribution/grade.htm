@@ -1,0 +1,127 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/distribution/newgrade.html">新建</a>
+          </div>
+          <h4 class="panel-title">等级</h4>
+          <p>管理，修改，新建等级</p>
+        </div>
+        <div class="panel-body">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+		  <div id="table2_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="table2"></label></div>
+          <block id="gradeList" name="DistributionGrade" start=1 kw="" parentId=0 perpage=10 mode=1 />
+          <table class="table table-striped dataTable no-footer" id="table2" catalog="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalog="row">
+				 <th  style="width: 272px;">编号</th>
+				 <th style="width: 415px;">标题</th>
+				 <th style="width: 415px;">积分</th>
+				 <th style="width: 415px;">代理数量</th>
+				 <th style="width: 415px;">状态</th>
+                 <th style="width: 400px;">最后修改</th>
+                 <th style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$gradeList[total]" value="0">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="grade" name="gradeList[data]">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="sorting_1">{$grade.sn}</td>
+                    <td>{$grade.title}</td>
+                    <td>
+					{$grade.maximum}
+					-
+					{$grade.maximum}
+					</td>
+                    <td>{$grade.agent_num}</td>
+                    <td>{$grade.status.label}</td>
+                    <td>{$grade['lastupdate']|formatdate}</td>
+                    <td>
+                    	<eq name="$grade[status][value]" value="0">
+                        <a class="btn btn-default-alt click_button_disabled" data-id="{$grade.identity}">禁用</a>
+                        </eq>
+                    	<eq name="$grade[status][value]" value="2">
+                        <a class="btn btn-primary-alt click_button_enabled" data-id="{$grade.identity}">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/distribution/newgrade_{$grade.identity}.html">修改</a>
+                    	<eq name="$grade[status][value]" value="2">
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$grade.identity}">删除</a>
+                        </eq>
+                        <a class="btn btn-default-alt" href="/distribution/gradeinfo_{$grade.identity}.html">查看</a>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($gradeList['total'],$gradeList['perpage'],$gradeList['start']);</php>
+           <div class="dataTables_info" id="table2_info" >Showing {$gradeList['start']} to {$gradeList['perpage']} of {$gradeList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/distribution/grade.js"></script>
+<template file="/footer" />

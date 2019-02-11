@@ -1,0 +1,19 @@
+<template file="top" />
+<link rel="stylesheet" href="/css/stock/stock.css"/>
+<block id="stockData" name="SecuritiesStock" stockId=0  start=1 perpage=1 />
+<title>{$stockData.data.title} 证券在线 </title>
+</head>
+
+<body>
+<template file="menu" />
+<div class="box clearfix">
+	<h1>{$stockData.data.title}</h1>
+    <ul>
+    	<li>基本</li>
+    	<li>分红</li>
+    	<li>股东</li>
+    	<li>增发</li>
+    	<li>配股</li>
+    </ul>    
+</div>
+<template file="bottom" />

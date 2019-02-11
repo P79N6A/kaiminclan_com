@@ -1,0 +1,122 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/recruitment/newquarters.html">新建</a>
+          </div>
+          <h4 class="panel-title">岗位</h4>
+          <p>管理，修改，新建岗位</p>
+        </div>
+        <div class="panel-body">
+          <block id="quartersList" name="RecruitmentQuarters" start=1 perpage=10 mode=1 />
+          <table class="table table-striped dataTable no-footer" id="table2" catalog="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalog="row">
+					<th  style="width: 272px;">编号</th>
+				 <th  style="width: 272px;">姓名</th>
+				 <th style="width: 415px;">单位</th>
+				 <th style="width: 415px;">部门</th>
+				 <th style="width: 415px;">岗位</th>
+				 <th style="width: 415px;">职位</th>
+                 <th style="width: 400px;">最后修改</th>
+                 <th style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$quartersList[total]" value="0">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="quarters" name="quartersList[data]">
+              <tr class="gradeA odd" catalog="row">
+                    <td>{$quarters.sn}</td>
+                    <td class="sorting_1">{$quarters.fullname}</td>
+                    <td>{$quarters.company.title}</td>
+                    <td>{$quarters.department.title}</td>
+                    <td>{$quarters.quarters.title}</td>
+                    <td>{$quarters.position.title}</td>
+                    <td>{$quarters['lastupdate']|formatdate}</td>
+                    <td>
+                    	<eq name="$quarters[status][value]" value="0">
+                        <a class="btn btn-default-alt click_button_disabled" data-id="{$department.identity}">禁用</a>
+                        </eq>
+                    	<eq name="$quarters[status][value]" value="2">
+                        <a class="btn btn-primary-alt click_button_enabled" data-id="{$department.identity}">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/recruitment/newquarters_{$quarters.identity}.html">修改</a>
+						<eq name="$quarters['status']['value']" value="1">
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$quarters.identity}">删除</a>
+                        </eq>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($quartersList['total'],$quartersList['perpage'],$quartersList['start']);</php>
+           <div class="dataTables_info" id="table2_info" >Showing {$quartersList['start']} to {$quartersList['perpage']} of {$quartersList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/recruitment/quarters.js"></script>
+<template file="/footer" />

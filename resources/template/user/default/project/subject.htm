@@ -1,0 +1,133 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/project/newsubject.html">新建</a>
+          </div>
+          <h4 class="panel-title">项目</h4>
+        </div>
+        <div class="panel-body">
+			 <div class="row">
+				<form id="filterForm" method="get" >
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$location.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <button type="reset" class="btn btn-default">重置</button>
+					</div>
+				</div>
+				</form>
+			 </div>
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+          <block id="subjectList" name="ProjectSubject" start=0 perpage=10 />
+          <table class="table table-striped dataTable no-footer" id="table2" subject="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr>
+				 <th >编号</th>
+				 <th >标题</th>
+				 <th >工期</th>
+                 <th>项目经理</th>
+                  <th>操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$subjectList.total" value="0">
+              <tr class="gradeA odd" subject="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="subject" name="subjectList.data">
+              <tr class="gradeA odd" subject="row">
+                    <td class="sorting_1">{$subject.sn}</td>
+                    <td class="sorting_1">{$subject.title}</td>
+                    <td>{$subject[expire_time]|fdate}</td>
+                    <td>{$subject[manager]['fullname']}</td>
+                    <td>
+                    	<eq name="$subject.status.value" value="0">
+                        <a class="btn btn-default-alt">禁用</a>
+                        </eq>
+                    	<eq name="$subject.status.value" value="2">
+                        <a class="btn btn-primary-alt">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/project/newsubject_{$subject.identity}.html">修改</a>
+                        <a class="btn btn-warning-alt" href="/project/leaguer_{$subject.identity}.html">成员管理</a>
+                        <a class="btn btn-danger-alt" href="/project/subjectinfo_{$subject.identity}.html">查看</a>
+						<eq name="$subject['status']['value']" value="1">
+                        	<a class="btn btn-danger-alt">删除</a>
+						</eq>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($couponList['total'],$couponList['perpage'],$couponList['start']);</php>
+           <div class="dataTables_info" id="table2_info" subject="status" aria-live="polite">Showing {$subjectList['start']} to {$subjectList['perpage']} of {$subjectList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+                            <span   class="active" >{$row.value}</span>
+               <a class="paginate_button current" href="{$row.url}">1</a>
+                        <php>}else{</php>
+                            <a href="{$row.url}" >{$row.value}</a>
+               <a class="paginate_button" href="{$row.url}">1</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script type="text/javascript" src="/js/1.0/project/subject"></script>
+<template file="/footer" />

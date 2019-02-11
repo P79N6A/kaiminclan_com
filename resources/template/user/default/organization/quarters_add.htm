@@ -1,0 +1,114 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.quartersId" value="0">
+<block id="quartersData" name="OrganizationQuarters" quartersId=0 perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">组织机构-新岗位</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="quartersId" value="{$quartersData.data.identity}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" id="title" name="title" value="{$quartersData.data.title}" required placeholder="标题" class="form-control">
+              </div>
+            </div>
+			  
+            <block id="departmentList" name="OrganizationDepartment" mode=1 />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">部门</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="department_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="department" name="departmentList.data">
+                    <option value="{$department.identity}"<eq name="$quartersData['data']['department_identity']" value="$department['identity']"> selected="selected"</eq>>{$department.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">介绍</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="content" rows="10">{$quartersData[data][content]|doc}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">主要工作</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="obligation" rows="10">{$quartersData[data][obligation]|doc}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">任职资格</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="competency" rows="10">{$quartersData[data][competency]|doc}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">介绍</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="outstand" rows="10">{$quartersData[data][outstand]|doc}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="3">{$quartersData[data][remark]|doc}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/organization/quarters.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/organization/quarters_admin.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

@@ -1,0 +1,159 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.employeeId" value="0">
+<block id="employeeData" name="OrganizationEmployee" employeeId=0 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">组织机构-新员工</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="employeeId" value="{$employeeData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">姓名</label>
+              <div class="col-sm-6">
+                <input type="text" name="fullname" required value="{$employeeData.data.fullname}" placeholder="姓名" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">身份证</label>
+              <div class="col-sm-6">
+                <input type="text" name="idcard" required value="{$employeeData.data.idcard}" placeholder="身份证" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">性别</label>
+              <div class="col-sm-6">
+				<input type="radio" name="sexuality" value="1" <eq name="$employeeData['data']['sexuality']" value="1">checked="checked"</eq> />男
+				<input type="radio" name="sexuality" value="2" <eq name="$employeeData['data']['sexuality']" value="2">checked="checked"</eq> />女
+				<input type="radio" name="sexuality" value="3" <eq name="$employeeData['data']['sexuality']" value="3">checked="checked"</eq> />机器
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">联络方式</label>
+              <div class="col-sm-2">
+                <input type="text" name="email" required value="{$employeeData.data.email}" placeholder="电子邮件" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" name="mobile" required value="{$employeeData.data.mobile}" placeholder="移动电话" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" name="wechat" required value="{$employeeData.data.wechat}" placeholder="微信号" class="form-control">
+              </div>
+            </div>
+            
+			        
+            <div class="form-group">
+                <label class="col-sm-3 control-label">地区</label>
+                <div class="col-sm-6" id="district">
+                <div class="col-sm-3">
+                  <select class="select2 province" name="province_district_identity" date-value="{$employeeData.data.province_district_identity}">
+                    <option value="">选择</option>
+                  </select>
+				  </div>
+                <div class="col-sm-3">
+                  <select class="select2 city" name="area_district_identity"  date-value="{$employeeData.data.area_district_identity}">
+                    <option value="">选择</option>
+                  </select>
+				  </div>
+                <div class="col-sm-3">
+                  <select class="select2 county" name="county_district_identity" date-value="{$employeeData.data.county_district_identity}">
+                    <option value="">选择</option>
+                  </select>
+                </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">联系地址</label>
+              <div class="col-sm-6">
+                <input type="text" name="address" required value="{$employeeData.data.address}" placeholder="联系地址" class="form-control">
+              </div>
+            </div>
+			          
+            <div class="form-group">
+                <label class="col-sm-3 control-label">身份</label>
+				<div id="position">
+                <div class="col-sm-2">
+                  <select class="select2 department" name="department_identity" data-value="{$employeeData.data.department_identity}" data-placeholder="Choose One" required>
+                    <option value="">部门</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <select class="select2 quarters" name="quarters_identity" data-value="{$employeeData.data.quarters_identity}" data-placeholder="Choose One" required>
+                    <option value="">岗位</option>
+                  </select>
+                </div>   
+                <div class="col-sm-2">
+                  <select class="select2 position" name="position_identity" data-value="{$employeeData.data.position_identity}" data-placeholder="Choose One" required>
+                    <option value="">职位</option>
+                  </select>
+                </div>   
+</div>				
+            </div>
+			  
+			    
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$employeeData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/organization/employee.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/cxselect/jquery.cxselect.min.js{__VERSION__}"></script>
+<script src="/js/1.0/organization/employee_add.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

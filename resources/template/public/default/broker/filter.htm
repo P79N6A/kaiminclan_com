@@ -1,0 +1,19 @@
+<div class="search">
+	<div class="box">
+		<ul class="clearfix menu">
+			<li <eq name="$location.mod" value="broker">class="curr"</eq> <empty name="$location.mod">class="curr"</empty> data-type="broker"><span>经纪商</span></li>
+			<li <eq name="$location.mod" value="super">class="curr"</eq> data-type="super"><span>行业监管</span></li>
+			<li <eq name="$location.mod" value="discount">class="curr"</eq> data-type="discount"><span>促销</span></li>
+			<li <eq name="$location.mod" value="news">class="curr"</eq> data-type="news"><span>资讯</span></li>
+		</ul>
+		<div class="clearfix">
+			<form id="filterForm">
+			<input type="hidden" id="filterType" value="broker" />
+			<input class="fn_left form-text" type="text" value="{$location.kw}" name="kw" placeholder="请输入关键字" />
+			<button class="fn_left form-button" type="submit" >搜索</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="adorm"></div>
+<script type="text/javascript" src="/js/brokerfactory/filter.js"></script>

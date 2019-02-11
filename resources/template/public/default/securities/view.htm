@@ -1,0 +1,34 @@
+<template file="top" />
+<block id="newsData" name="IntelligenceDocumentation" documentationId=0 perpage=1 />
+<link rel="stylesheet" href="/css/base/reset.css"/>
+<link rel="stylesheet" href="/css/stock/view.css"/>
+
+<title>{$newsData.data.title} - 新闻前线 </title>
+</head>
+
+<body>
+<template file="menu" />
+<div class="box clearfix">
+    <div class="fn_left menu">
+    	<div>阅读量：{$newsData.data.viewnum}</div>
+    </div>    
+    <div class="fn_left content">
+        <gt name="$newsData['total']" value="0">
+        <h1>{$newsData.data.title}</h1>
+        <div class="timer">发布时间：{$newsData[data][dateline]|formatdate}</div>
+        <block id="contentData" name="IntelligenceSubstance" documentationId=0 start=1 perpage=1 />
+        <div class="article">{$contentData.data.content}</div>
+        <else />
+        </gt>
+    </div>
+    <div class="fn_right sidebar">
+        <h2>最新文章</h2>
+        <block id="newsList" name="IntelligenceDocumentation" catalogueId=26 start=1 perpage=10 />
+        <ul>
+            <volist id="news" name="newsList['data']">
+            <li><a href="/stock/view_{$news.identity}.html">{$news.title}</a></li>
+            </volist>
+        </ul>
+    </div>
+</div>
+<template file="bottom" />

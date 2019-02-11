@@ -1,0 +1,228 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.paginationId" value="0">
+<block id="paginationData" name="PaginationPage" paginationId=0 perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">页面管理-新页面</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+		
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="paginationId" value="{$paginationData.data.identity}" />
+			
+              <div id="basicWizard" class="basic-wizard">
+
+             <ul class="nav nav-pills nav-justified">
+                  <li class="active"><a href="#tab1" data-toggle="tab"> 基本信息</a></li>
+                  <li><a href="#tab2" data-toggle="tab"> 参数</a></li>
+                  <li><a href="#tab3" data-toggle="tab"> SEO信息</a></li>
+                </ul>
+				<div class="tab-content">
+                  <div class="tab-pane active" id="tab1">
+			
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" placeholder="标题" value="{$paginationData.data.title}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">业务</label>
+                <div id="catalogue">
+                <div class="col-sm-2">
+                  <select name="domain_identity" class="select2 domain" data-value="{$$paginationData.data.domain_identity}" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <select name="platform_identity" data-value="{$$paginationData.data.platform_identity}" class="select2 platform" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <select name="catalogue_identity" data-value="{$$paginationData.data.catalogue_identity}" class="select2 catalogue" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                  </select>
+                </div>
+                </div>
+            </div>
+                   <div class="form-group">
+                <label class="col-sm-3 control-label">权限</label>
+                <div class="col-sm-6">
+                  <select name="permission" class="select2" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <option value="3"<eq name="$paginationData['data']['permission']['value']" value="3"> selected="selected"</eq>>供应商</option>
+                    <option value="1"<eq name="$paginationData['data']['permission']['value']" value="1"> selected="selected"</eq>>管理员</option>
+                    <option value="2"<eq name="$paginationData['data']['permission']['value']" value="2"> selected="selected"</eq>>运营人员</option>
+                    <option value="4"<eq name="$paginationData['data']['permission']['value']" value="4"> selected="selected"</eq>>客户</option>
+                    <option value="5"<eq name="$paginationData['data']['permission']['value']" value="5"> selected="selected"</eq>>游客</option>
+                    <option value="0"<eq name="$paginationData['data']['permission']['value']" value="6"> selected="selected"</eq>>用户</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">目录</label>
+              <div class="col-sm-6">
+                <input type="text" name="folder" placeholder="目录" value="{$paginationData.data.folder}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">文件</label>
+              <div class="col-sm-6">
+                <input type="text" name="primaltplname" placeholder="文件" value="{$paginationData.data.primaltplname}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">状态</label>
+                <div class="col-sm-6">
+                  <select name="status" class="select2" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <option value="0"<eq name="$paginationData['data']['status']" value="0"> selected="selected"</eq>>启用</option>
+                    <option value="1"<eq name="$paginationData['data']['status']" value="1"> selected="selected"</eq>>禁用</option>
+                  </select>
+                </div>
+            </div>
+                  </div>
+                  <div class="tab-pane" id="tab2">
+                    
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">地址</label>
+              <div class="col-sm-6">
+                <div class="input-group mb15">
+                  <input type="text" name="url" value="{$paginationData.data.url}" class="form-control">
+                  <span class="input-group-addon">.html</span>
+                </div>
+              </div>
+			  
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">参数</label>
+              <div class="col-sm-6">
+              <table class="table table-bordered mb30">
+            <thead>
+              <tr>
+                <th>字段</th>
+                <th>类型</th>
+                <th>注释</th>
+                <th>默认</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+			
+            <tbody id="setting_form_box">
+             <empty name="$paginationData['data']['setting']">
+              <tr class="form_setting_field">
+                <td><input type="text" name="setting[1][code]" class="form-control"></td>
+                <td> <input type="text" name="setting[1][type]" class="form-control"></td>
+                <td><input type="text" name="setting[1][tooltip]" class="form-control"></td>
+                <td><input type="text" name="setting[1][value]" class="form-control"></td>
+                <td><input type="button" class="form-control" value="删除"></td>
+              </tr>
+              <else />
+              <volist id="setting" name="paginationData['data']['setting']">
+              <tr id="form_setting_field_{$key}" class="form_setting_field">
+                <td><input type="text" name="setting[{$key}][code]" class="form-control" value="{$setting.code}"></td>
+                <td> <input type="text" name="setting[{$key}][type]" class="form-control" value="{$setting.type}"></td>
+                <td><input type="text" name="setting[{$key}][tooltip]" class="form-control" value="{$setting.tooltip}"></td>
+                <td><input type="text" name="setting[{$key}][value]" class="form-control" value="{$setting.value}"></td>
+                <td><input type="button" data-id="form_setting_field_{$key}" class="click_button_remove form-control" value="删除"></td>
+              </tr>
+              </volist>
+              </empty>
+            </tbody>
+            <thead>
+              <tr>
+                <th colspan="4">
+                <a href="javascript:;" id="click_setting_add" data-cnt="1">新建</a>
+                </th>
+              </tr>
+            </thead>
+          </table>
+              
+                
+              </div>
+			  
+            </div>
+                  </div>
+                  <div class="tab-pane" id="tab3">
+                     <div class="form-group">
+              <label class="col-sm-3 control-label">SEO标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="seotitle" placeholder="SEO标题" value="{$paginationData.data.seotitle}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">SEO关键字</label>
+              <div class="col-sm-6">
+                <input type="text" name="seokeyword" placeholder="SEO关键字" value="{$paginationData.data.seokeyword}" class="form-control">
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">SEO描述</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="2" name="seodescription">{$paginationData.data.seodescription}</textarea>
+              </div>
+            </div>
+                  </div>
+                  </div>
+                  
+                </div><!-- tab-content -->
+
+            
+            
+           
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/foundation/pagination.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/cxselect/jquery.cxselect.min.js{__VERSION__}"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/foundation/pagination_admin.js{__VERSION__}"></script>
+<template file="/footer" />

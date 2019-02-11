@@ -1,0 +1,94 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">账户与权限-新角色</h4>
+        </div>
+            <block id="roleData" name="AuthorityRole" roleId=0 perpage=1 status="-1" />
+          <form id="roleForm" class="form-horizontal form-bordered">
+            <input type="hidden" name="roleId" value="{$roleData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required placeholder="标题" value="{$roleData.data.title}" class="form-control">
+              </div>
+            </div>
+            <block id="roleList" name="AuthorityRole" />
+            
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">隶属角色</label>
+              <div class="col-sm-6">
+                          <select name="role_identity" class="select2" data-placeholder="Choose One" required>
+                            <option value="0">选择</option>
+                            <volist id="role" name="roleList.data">
+                            <lt name="$role.role_identity" value="1">
+                            <option value="{$role.identity}" <eq name="$roleData['data']['role_identity']" value="$role['identity']">selected="selected"</eq>>{$role.title}</option>
+                            <volist id="subRole" name="roleList.data">
+                            <eq name="$subRole['role_identity']" value="$role['identity']">
+                            <option value="{$subRole.identity}" <eq name="$roleData['data']['role_identity']" value="$subRole['identity']">selected="selected"</eq>>|---{$subRole.title}</option>
+                            </eq>
+                            </volist>
+                            </lt>
+                            </volist>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="5">{$roleData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/authority/role.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/cxselect/jquery.cxselect.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/authority/role_add.js{__VERSION__}"></script>
+<template file="/footer" />

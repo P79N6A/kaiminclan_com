@@ -1,0 +1,87 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">应用安装</h3>
+        </div>
+        <div class="panel-body">
+        <div class="col-md-12">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#home" data-toggle="tab"><strong>本地</strong></a></li>
+          <li><a href="#profile" data-toggle="tab"><strong>在线</strong></a></li>
+        </ul>
+        
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div class="tab-pane active" id="home">
+            
+            
+          </div>
+          <div class="tab-pane" id="profile">
+            <div class="row">
+          
+          <form id="form1" class="form-horizontal">
+              
+                <div class="form-group">
+                  <label class="col-sm-4 control-label">Name:</label>
+                  <div class="col-sm-8">
+                    <input type="text" name="name" class="form-control">
+                  </div>
+                </div>
+                
+                
+              <div class="panel-footer">
+                <button class="btn btn-primary">确认</button>
+              </div><!-- panel-footer -->
+          </form>
+            
+        
+      </div>
+          </div>
+          
+          
+        </div>
+        
+        
+        
+        <!-- Tab panes -->
+        
+        
+      </div>
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<template file="/footer" />

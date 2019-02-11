@@ -1,0 +1,133 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.bondId" value="0">
+<block id="bondData" name="DebentureBond" bondId=0 status="-1" perpage=1  />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">债券管理-新债券</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="bondId" value="{$bondData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">简称</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$bondData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">代码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" required value="{$bondData.data.code}" placeholder="代码" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">全称</label>
+              <div class="col-sm-6">
+                <input type="text" name="fullname" required value="{$bondData.data.fullname}" placeholder="全称" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">上市日</label>
+              <div class="col-sm-6">
+                <input type="text" name="market_date" required value="{$bondData.data.market_date}" placeholder="上市日" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">期限（年）</label>
+              <div class="col-sm-6">
+                <input type="text" name="deadline" required value="{$bondData.data.deadline}" placeholder="期限" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">到期日	</label>
+              <div class="col-sm-6">
+                <input type="text" name="expire_date" required value="{$bondData.data.expire_date}" placeholder="到期日" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">发行额(亿元)</label>
+              <div class="col-sm-6">
+                <input type="text" name="position" required value="{$bondData.data.position}" placeholder="发行额(亿元)" class="form-control">
+              </div>
+            </div>
+            <block id="currencyList" name="DebentureCatalogue" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">分类</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="catalogue_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="currencyList.data">
+                    <option value="{$catalogue.identity}"<eq name="$bondData['data']['catalogue_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$bondData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/debenture/bond.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/debenture/bond_add.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

@@ -1,0 +1,106 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.technicalId" value="0">
+<block id="technicalData" name="OrganizationTechnical" technicalId=0 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">组织机构-新职称</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="technicalId" value="{$technicalData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">编码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" required value="{$technicalData.data.code}" placeholder="编码" class="form-control">
+              </div>
+			 </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$technicalData.data.title}" placeholder="标题" class="form-control">
+              </div>
+			 </div>
+            <block id="quartersList" name="OrganizationPosition" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">职位</label>
+                <div class="col-sm-6" id="position">
+                  <select class="select2 company" name="company_identity"  data-value="{$technicalData['data']['department_identity']}">
+				  </select>
+                  <select class="select2 department" name="department_identity"  data-value="{$technicalData['data']['department_identity']}">
+				  </select>
+                  <select class="select2 position" name="position_identity" required data-value="{$technicalData['data']['quarters_identity']}">
+                    <option value="">选择</option>
+                    <volist id="quarters" name="quartersList.data">
+                    <option value="{$quarters.identity}"<eq name="$technicalData['data']['quarters_identity']" value="$quarters['identity']"> selected="selected"</eq>>{$quarters.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">介绍</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="content">{$technicalData[data][content]|doc}</textarea>
+              </div>
+            </div>
+          
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$technicalData[data][remark]|doc}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/organization/technical.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/cxelect/jquery.cxselect.min.js{__VERSION__}"></script>
+<script src="/js/1.0/organization/technical_admin.js"></script>
+<template file="/footer" />

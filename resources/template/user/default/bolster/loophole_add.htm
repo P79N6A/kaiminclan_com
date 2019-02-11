@@ -1,0 +1,125 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.loopholeId" value="0">
+<block id="loopholeData" name="BolsterLoophole" loopholeId=0 perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">漏洞管理-新漏洞</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="loopholeId" value="{$loopholeData.data.identity}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" id="title" name="title" value="{$loopholeData.data.title}" required placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">软件</label>
+              <div class="col-sm-6">
+                    <select class="select2" name="software_identity" data-placeholder="Choose One" required>
+                        <option value="">选择</option>
+                    </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">危害等级</label>
+              <div class="col-sm-6">
+                    <select class="select2" name="weight" data-placeholder="Choose One" required>
+                        <option value="">选择</option>
+                    </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">厂商</label>
+              <div class="col-sm-6">
+                    <select class="select2" name="factory_identity" data-placeholder="Choose One" required>
+                        <option value="">选择</option>
+                    </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">漏洞类型</label>
+              <div class="col-sm-6">
+                    <select class="select2" name="style" data-placeholder="Choose One" required>
+                        <option value="">选择</option>
+                    </select>
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">简介</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="content" rows="10">{$loopholeData[data][content]|doc}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">参考网址</label>
+              <div class="col-sm-6">
+	              <div class="col-sm-2">
+	                <input type="text" id="title" name="reference['title'][]" value="{$loopholeData.data.title}" required placeholder="标题" class="form-control">
+	              </div>
+	              <div class="col-sm-4">
+	                <input type="text" id="title" name="reference['url'][]" value="{$loopholeData.data.title}" required placeholder="链接" class="form-control">
+	              </div>
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="5">{$loopholeData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/bolster/loophole.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/bolster/loophole_add.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

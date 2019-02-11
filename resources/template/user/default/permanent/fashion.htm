@@ -1,0 +1,129 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/permanent/newfashion.html">新建</a>
+          </div>
+          <h4 class="panel-title">分类</h4>
+          <p>删除，编辑，新建融资分类</p>
+        </div>
+        <div class="panel-body">
+			 <div class="row">
+				<form id="filterForm" method="get" >
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$location.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <button type="reset" class="btn btn-default">取消</button>
+					</div>
+				</div>
+				</form>
+			 </div>
+          <block id="catalogList" name="PermanentFashion" kw="" start=1 perpage=10 />
+          <table class="table table-striped dataTable no-footer" id="table2" catalog="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalog="row">
+					<th  style="width: 272px;">名称</th>
+					<th style="width: 415px;">债务数量</th>
+					<th style="width: 415px;">授信数量</th>
+					<th style="width: 400px;">最后修改</th>
+					<th style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$catalogList.total" value="0">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="catalog" name="catalogList.data">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="sorting_1">{$catalog.title}</td>
+                    <td>{$catalog.indebtedness_num}</td>
+                    <td>{$catalog.credit_num}</td>
+                    <td>{$catalog['lastupdate']|formatdate}</td>
+                    <td>
+                    	<eq name="$catalog[status][value]" value="0">
+                        <a class="btn btn-default-alt">禁用</a>
+                        </eq>
+                    	<eq name="$catalog[status][value]" value="2">
+                        <a class="btn btn-primary-alt">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/permanent/newfashion_{$catalog.identity}.html">修改</a>
+                    	<eq name="$catalog[status][value]" value="2">
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$catalog.identity}">删除</a>
+                        </eq>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($catalogList['total'],$catalogList['perpage'],$catalogList['start']);</php>
+           <div class="dataTables_info" id="table2_info" catalog="status" aria-live="polite">Showing {$catalogList['start']} to {$catalogList['perpage']} of {$catalogList['total']} entries</div>
+            <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/permanent/fashion.js"></script>
+<template file="/footer" />

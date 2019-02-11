@@ -1,0 +1,157 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/permanent/newindebtedness.html">新建</a>
+          </div>
+          <h4 class="panel-title">债务</h4>
+          <p>删除，编辑，新建债务</p>
+        </div>
+        <div class="panel-body">
+			 <div class="row">
+				<form id="filterForm" method="get" >
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<block id="platformList" name="PermanentCredit" />
+					  <select id="searchCurrencyId" name="creditId" class="select2" data-placeholder="选择机构" required>
+						<option value="">--授信机构--</option>
+						<volist id="platform" name="platformList.data">
+						<option value="{$platform.identity}" <eq name="$location.creditId" value="$platform['identity']">selected="selected"</eq>>{$platform.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-6">
+					<div class="col-sm-3">
+					<input type="text" name="startDate" placeholder="开始时间" value="{$location.startDate}" class="form-control">
+					</div>
+					<div class="col-sm-3">
+					<input type="text" name="stopDate" placeholder="结束时间" value="{$location.stopDate}" class="form-control">
+					</div>
+				  </div>
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$location.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <button type="reset" class="btn btn-default">重置</button>
+					</div>
+				</div>
+				</form>
+			 </div>
+          <block id="indebtednessList" name="PermanentIndebtedness" creditId=0 kw="" startDate=0 stopDate=0 start=1 perpage=10 status=-1 />
+          <table class="table table-striped dataTable no-footer" id="table2" indebtedness="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr >
+                 <th rowspan="2"  style="width: 372px;">编号</th>
+                 <th rowspan="2"  style="width: 372px;">主题</th>
+                 <th rowspan="2"  style="width: 372px;">机构</th>
+				 <th colspan="2" style="width: 315px;">有效期</th>
+				 <th rowspan="2" style="width: 100px;">金额</th>
+                 <th rowspan="2" style="width: 200px;">最后修改</th>
+                   <th rowspan="2" style="width: 400px;">操作</th>
+                 </tr>
+                 <tr >
+                   <th style="width: 315px;">开始</th>
+                   <th style="width: 315px;">结束</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$indebtednessList.total" value="0">
+              <tr class="gradeA odd" indebtedness="row">
+                    <td class="dataTables_empty" colspan="6">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="indebtedness" name="indebtednessList.data">
+              <tr class="gradeA odd" indebtedness="row">
+                    <td class="sorting_1">{$indebtedness.sn}</td>
+                    <td class="sorting_1">{$indebtedness.title}</td>
+                    <td class="sorting_1">
+                    <a href="/permanent/indebtedness_{$indebtedness.credit_identity}_1.html">
+                    	{$indebtedness.credit.title}
+                    </a>
+                    </td>
+                    <td>
+						{$indebtedness['start_date']|fdate}
+					</td>
+                    <td>
+						{$indebtedness['stop_date']|fdate}</td>
+                    <td>{$indebtedness.amount}</td>
+                    <td>{$indebtedness['lastupdate']|formatdate}</td>
+                    <td>
+						<eq name="$indebtedness['status']['value']" value="1">
+                        <a class="btn btn-success-alt" href="/permanent/newindebtedness_{$indebtedness.identity}.html">修改</a>
+                        <a class="btn btn-danger-alt">删除</a>
+						</eq>
+                        <a class="btn btn-primary-alt" href="/permanent/payable_{$indebtedness.identity}.html">还款计划</a>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($indebtednessList['total'],$indebtednessList['perpage'],$indebtednessList['start'],'/permanent/indebtedness_'.$_GET['creditId'].'_{page}.html');</php>
+           <div class="dataTables_info" id="table2_info" indebtedness="status" aria-live="polite">Showing {$indebtednessList['start']} to {$indebtednessList['perpage']} of {$indebtednessList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/permanent/indebtedness.js"></script>
+<template file="/footer" />

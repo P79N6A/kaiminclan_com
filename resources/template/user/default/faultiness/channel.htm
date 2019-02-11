@@ -1,0 +1,115 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+     	<div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/faultiness/newchannel.html">新建</a>
+          </div>
+          <h4 class="panel-title">测试类型</h4>
+          <p>管理、新建、编辑测试类型</p>
+        </div>
+        
+        
+        <div class="panel-body">
+          <div class="table-responsive">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+          <block id="channelList" name="FaultinessChannel" start=1 perpage=10 />
+          <table class="table table-striped dataTable no-footer" id="table2" role="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column ascending" style="width: 272px;">昵称</th><th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 415px;">角色</th><th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 400px;">状态</th><th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 229px;">最后登录</th>
+                   <th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$channelList.total" value="0">
+              <tr class="gradeA odd" role="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="channel" name="channelList.data">
+              <tr class="gradeA odd" role="row">
+                    <td class="sorting_1">{$channel.title}</td>
+                    <td>{$channel.role.title}</td>
+                    <td>{$channel.status.label}</td>
+                    <td class="center">{$channel['login_time']|formatdate}</td>
+                    <td>
+                    	<eq name="$channel.status.value" value="0">
+                        <a class="btn btn-default-alt">禁用</a>
+                        </eq>
+                    	<eq name="$channel.status.value" value="2">
+                        <a class="btn btn-primary-alt">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/faultiness/newchannel_{$channel.identity}.html">修改</a>
+                        <a class="btn btn-danger-alt click_button_delete" data-id="{$channel.identity}">删除</a>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+           
+            <php>$pageData = $this->page($channelList['total'],$channelList['perpage'],$channelList['start']);</php>
+           <div class="dataTables_info" id="table2_info" role="status" aria-live="polite">Showing {$FaultinessExample['start']} to {$FaultinessExample['perpage']} of {$FaultinessExample['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/faultiness/channel.js"></script>
+<template file="/footer" />

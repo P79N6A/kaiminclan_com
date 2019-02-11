@@ -1,0 +1,12 @@
+html,body  { background:#eeeeee; }
+a { text-decoration:none; color:#666; }
+.item { background:#fff; margin-bottom:15px; padding:15px; float:left; width:320px; }
+.item .icon { width:100px; }
+.item .info h2 { width:220px; text-align:left; }
+
+.block { background:#fff; padding:10px; }
+.block ul li { padding-bottom:10px; }
+
+
+
+.w700 { width:700px; }

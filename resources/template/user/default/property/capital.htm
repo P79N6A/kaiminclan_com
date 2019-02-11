@@ -1,0 +1,157 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/property/newcapital.html">新建</a>
+          </div>
+          <h4 class="panel-title">主体管理</h4>
+          <p>管理，修改，编辑，主体</p>
+        </div>
+		
+          <block id="capitalList" name="PropertyCapital" parentId=0  status=-1 start=1 perpage=10 />
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<block id="scaleList" name="PropertyScale" />
+					  <select id="searchPlatformId" class="select2" data-placeholder="选择平台" required>
+						<option value="">--类型--</option>
+						<volist id="scale" name="scaleList.data">
+						<option value="{$scale.identity}">{$scale.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-3">
+					<block id="industryList" name="PropertyIndustry" />
+					  <select id="searchPlatformId" class="select2" data-placeholder="选择平台" required>
+						<option value="">--行业--</option>
+						<volist id="industry" name="industryList.data">
+						<option value="{$industry.identity}">{$industry.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$paginationData.data.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <button type="reset" class="btn btn-default">重置</button>
+					</div>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+        <div class="panel-body">
+          <table class="table table-striped dataTable no-footer" id="table2" capital="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr >
+				 <th >编号</th>
+				 <th >标题</th>
+				 <th >行业</th>
+				 <th >等级</th>
+                 <th >状态</th>
+                   <th >操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$capitalList.total" value="0">
+              <tr class="gradeA odd" capital="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="capital" name="capitalList.data">
+              <tr class="gradeA odd" capital="row">
+                    <td>{$capital.sn}</td>
+                    <td><a href="/property/capital_{$capital.identity}.html">{$capital.title}</a></td>
+                    <td>{$capital.industry.title}</td>
+                    <td>{$capital.scale.title}</td>
+                    <td>{$capital['status']['label']}</td>
+                    <td>
+                    	<eq name="$capital[status][value]" value="0">
+                        <a class="btn btn-default-alt click_button_disabled" data-id="{$capital.identity}">禁用</a>
+                        </eq>
+                    	<eq name="$capital[status][value]" value="2">
+                        <a class="btn btn-primary-alt click_button_enabled" data-id="{$capital.identity}">启用</a>
+                        </eq>
+                    	<eq name="$capital[status][value]" value="1">
+                        <a class="btn btn-success-alt" href="/property/newcapital__{$capital.identity}.html">修改</a>
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$capital.identity}">删除</a>
+                        </eq>
+                    	<eq name="$capital[status][value]" value="0">
+                        <a class="btn btn-primary-alt" href="/property/newcapital_{$capital.identity}.html">新主体</a>
+                        </eq>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($capitalList['total'],$capitalList['perpage'],$capitalList['start'],'/property/capital_'.$_GET['parentId'].'_{page}.html');</php>
+           <div class="dataTables_info" id="table2_info" capital="status" aria-live="polite">Showing {$capitalList['start']} to {$capitalList['perpage']} of {$capitalList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script type="text/javascript">
+
+</script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/1.0/property/capital.js"></script>
+<template file="/footer" />

@@ -1,0 +1,45 @@
+<template file="top" />
+<link rel="stylesheet" href="/css/foreign/search.css"/>
+
+<title>证券在线 </title>
+</head>
+
+<body>
+<template file="menu" />
+<div class="box clearfix">
+	<div class="column fn_left">
+    <block id="industryList" name="ForeignCurrency" />
+		<ul>
+			<volist id="industry" name="industryList.data">
+			<li><a href="{$industry.identity}">{$industry.title}</a></li>
+			</volist>
+		</ul>
+	</div>
+	<div class="content fn_left">
+    <block id="foreignList" name="ForeignContact" industryId=0  start=1 perpage=10 />
+    <volist id="foreign" name="foreignList.data">
+    <div class="item">
+    	<a href="/foreign/view_{$foreign.symbol}" target="_blank">
+    	<h1>{$foreign.title}</h1>
+        </a>
+		<ul>
+			<li>上市时间：{$foreign.market_date}</li>
+		</ul>
+    </div>
+    </volist>
+	</div>
+	<div class="sidebar fn_right">
+		<block id="foreignList" name="ForeignContact" status=5 perpage=10 />
+    <volist id="foreign" name="foreignList.data">
+    <div class="item">
+    	<a href="/foreign/view_{$foreign.symbol}" target="_blank">
+    	<h1>{$foreign.title}</h1>
+        </a>
+		<ul>
+			<li>上市时间：{$foreign.market_date}</li>
+		</ul>
+    </div>
+    </volist>
+	</div>
+</div>
+<template file="bottom" />

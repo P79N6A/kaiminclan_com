@@ -1,0 +1,99 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">数据库</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+			<block id="registryData" name="FoundationRegistry" bz="database" />
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+			
+              <div id="basicWizard" class="basic-wizard">
+
+			
+            <div class="form-group">
+              <label class="col-sm-3 control-label">主机</label>
+              <div class="col-sm-4">
+                <input type="text" name="registry[database][host]" placeholder="主机" value="{$registryData.data.host}" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" name="registry[database][port]" placeholder="端口" value="{$registryData.data.port}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">数据库</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[database][dbname]" placeholder="数据库" value="{$registryData.data.dbname}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">用户名</label>
+              <div class="col-sm-6">
+                  <input type="text" name="registry[database][username]" value="{$registryData.data.username}" class="form-control">
+              </div>
+			  
+            </div>
+                     <div class="form-group">
+              <label class="col-sm-3 control-label">密码</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[database][password]" placeholder="密码" value="{$registryData.data.password}" class="form-control">
+              </div>
+            </div>
+                  </div>
+                  
+                </div><!-- tab-content -->
+
+            
+            
+           
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <button type="reset" class="btn btn-default">重置</button>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/foundation/database.js"></script>
+<template file="/footer" />

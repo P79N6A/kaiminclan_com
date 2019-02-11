@@ -1,0 +1,104 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.expensesId" value="0">
+<block id="expensesData" name="BankrollExpenses" expensesId=0 start=1 perpage=1 />
+</gt>
+<php>var_dump($expensesData);</php>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">转出管理-新转出</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="expensesId" value="{$expensesData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+
+            <block id="accountList" name="BankrollAccount" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">账户</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="account_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="account" name="accountList.data">
+                    <option value="{$account.identity}"<eq name="$revenueData['data']['account_identity']" value="$broker['identity']"> selected="selected"</eq>>{$account.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+
+            <block id="subjectList" name="BankrollSubject" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">科目</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="subject_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="subject" name="subjectList.data">
+                    <option value="{$subject.identity}"<eq name="$revenueData['data']['subject_identity']" value="$broker['identity']"> selected="selected"</eq>>{$subject.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">金额</label>
+              <div class="col-sm-6">
+                <input type="text" name="amount" required value="{$expensesData.data.amount}" placeholder="金额" class="form-control">
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$expensesData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/bankroll/expenses.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/bankroll/expenses_admin.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

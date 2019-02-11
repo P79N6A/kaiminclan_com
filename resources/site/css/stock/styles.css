@@ -1,0 +1,20 @@
+/* CSS Document */
+a { text-decoration:none; }
+.box { width:1200px; margin:0 auto; }
+.header { background:#fff; height:60px; margin-bottom:30px; }
+.header .nav { width:660px; height:60px; }
+.header .nav ul.tab li { float:left; padding:15px 25px; height:30px; line-height:30px; }
+.header .nav ul.tab li a { font-weight:800; font-size:18px; color:#333; display:block; }
+
+.top { background:#000; height:36px; }
+.top .contact { color:#999; line-height:36px; }
+.top ul { float:right; }
+.top ul li { float:left; padding:0 10px; }
+.top ul li a { color:#999; display:block; height:36px; line-height:36px; }
+.top ul li a:hover { color:#fff; }
+
+.footer { background:#24272c; height:260px; margin-top:50px; padding-top:30px; color:#eeeeee; }
+.footer .link { border-bottom:#3e444b 1px solid; }
+.footer .copyright { padding-bottom:30px; }
+.footer h2 { padding-top:30px; }
+.footer .warning { background:#282e33; border-left:#f2672a 10px solid; padding:15px 0; padding-left:50px; margin:30px 0; }

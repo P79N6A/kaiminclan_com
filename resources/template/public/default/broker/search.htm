@@ -1,0 +1,62 @@
+<template file="/broker/header" />
+<template file="/broker/filter" />
+<block id="indexList" name="SearchIndex" index=0 start=1 perpage=20 kw="" />
+<div class="box clearfix">
+	<div class="fn_left">
+	<gt name="$indexList['total']" value="0">
+	
+	<else />
+	没有你要的数据
+	</gt>
+	</div>
+	
+	<div class="fn_right">
+		<div class="block">
+		
+		</div>
+		<div class="block">
+			<div class="clearfix">
+				<h2 class="fn_left">热门经纪商</h2>
+				<a class="fn_right" href="/broker/company.html" target="_blank">>></a>
+			</div>
+			<block id="brokerList" name="IntercalateBroker" perpage=10 />
+			<ul>
+				<volist id="broker" name="brokerList.data">
+				<li>
+					<img src="{$broker.cover.attach}" />
+					<a href="">{$broker.title}</a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<div class="block">
+			<div class="clearfix">
+				<h2 class="fn_left">最新政策</h2>
+				<a class="fn_right" href="" target="_blank">>></a>
+			</div>
+			<block id="policyList" name="IntelligenceDocumentation" catalogueId=0 perpage=10 />
+			<ul>
+				<volist id="policy" name="policyList.data">
+				<li>
+					<a href="">{$policy.title} </a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+		<div class="block">
+			<div class="clearfix">
+				<h2 class="fn_left">热门资讯</h2>
+				<a class="fn_right" href="" target="_blank">>></a>
+			</div>
+			<block id="newsList" name="IntelligenceDocumentation" catalogueId=42 perpage=10 />
+			<ul>
+				<volist id="news" name="newsList.data">
+				<li>
+					<a href="">{$news.title} </a>
+				</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+<template file="/broker/footer" />

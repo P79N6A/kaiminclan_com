@@ -1,0 +1,177 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.holidayId" value="0">
+<block id="holidayData" name="RemunerationHoliday" holidayId=0 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">组织机构-新假期</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="holidayId" value="{$holidayData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">姓名</label>
+              <div class="col-sm-6">
+                <input type="text" name="fullname" required value="{$holidayData.data.fullname}" placeholder="姓名" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">身份证</label>
+              <div class="col-sm-6">
+                <input type="text" name="idcard" required value="{$holidayData.data.idcard}" placeholder="身份证" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">性别</label>
+              <div class="col-sm-6">
+				<input type="radio" name="sexuality" value="1" <eq name="$holidayData['data']['sexuality']" value="1">checked="checked"</eq> />男
+				<input type="radio" name="sexuality" value="2" <eq name="$holidayData['data']['sexuality']" value="2">checked="checked"</eq> />女
+				<input type="radio" name="sexuality" value="3" <eq name="$holidayData['data']['sexuality']" value="3">checked="checked"</eq> />机器
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">电子邮件</label>
+              <div class="col-sm-6">
+                <input type="text" name="email" required value="{$holidayData.data.email}" placeholder="电子邮件" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">联系电话</label>
+              <div class="col-sm-6">
+                <input type="text" name="mobile" required value="{$holidayData.data.mobile}" placeholder="联系电话" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">微信号</label>
+              <div class="col-sm-6">
+                <input type="text" name="wechat" required value="{$holidayData.data.wechat}" placeholder="微信号" class="form-control">
+              </div>
+            </div>
+			        
+            <div class="form-group">
+                <label class="col-sm-3 control-label">地区</label>
+                <div class="col-sm-6" id="district">
+                  <select class="select2" name="district_identity" data-first-title="" date-value="">
+                    <option value="">选择</option>
+                  </select>
+                  <select class="select2" name="district_identity" data-first-title="" date-value="">
+                    <option value="">选择</option>
+                  </select>
+                  <select class="select2" name="district_identity" data-first-title="" date-value="">
+                    <option value="">选择</option>
+                  </select>
+                </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">联系地址</label>
+              <div class="col-sm-6">
+                <input type="text" name="address" required value="{$holidayData.data.address}" placeholder="联系地址" class="form-control">
+              </div>
+            </div>
+			  
+            <block id="departmentList" name="RemunerationDepartment" mode=1 />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">部门</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="department_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="department" name="departmentList.data">
+                    <option value="{$department.identity}"<eq name="$holidayData['data']['department_identity']" value="$department['identity']"> selected="selected"</eq>>{$department.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+			  
+            <block id="quartersList" name="RemunerationQuarters" />
+            <div class="form-group">
+                <label class="col-sm-3 control-label">岗位</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="quarters_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="quarters" name="quartersList.data">
+                    <option value="{$quarters.identity}"<eq name="$holidayData['data']['quarters_identity']" value="$quarters['identity']"> selected="selected"</eq>>{$quarters.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+			  
+            <block id="positionList" name="RemunerationPosition" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">职位</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="position_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="position" name="positionList.data">
+                    <option value="{$position.identity}"<eq name="$holidayData['data']['position_identity']" value="$position['identity']"> selected="selected"</eq>>{$position.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$holidayData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/organization/holiday.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/cxelect/jquery.cxselect.min.js{__VERSION__}"></script>
+<script src="/js/1.0/remuneration/holiday_admin.js"></script>
+<template file="/footer" />

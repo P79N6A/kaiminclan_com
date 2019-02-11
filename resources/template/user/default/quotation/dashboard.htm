@@ -1,0 +1,346 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<!---  -->
+
+<section>
+
+  <div class="leftpanel">
+
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+      
+	<template file="/meminfo" />
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+		<block id="noticeList" name="MessengerMessage" />
+		<gt name="$noticeList['total']" value="0">
+	  <div class="row">
+          <div class="col-md-6">
+          
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <volist id="notice" name="noticeList['data']">
+			  <eq name="$notci['type']" value="0">
+              <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Well done!</strong> You successfully read this <a href="" class="alert-link">important alert message</a>.
+              </div>
+			  </eq>
+			  <eq name="$notci['type']" value="1">
+              <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Heads up!</strong> This <a href="" class="alert-link">alert needs your attention</a>, but it's not super important.
+              </div>
+			  </eq>
+			  <eq name="$notci['type']" value="2">
+              <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Warning!</strong> Best check yo self, you're <a href="" class="alert-link">not looking too good</a>.
+              </div>
+			  </eq>
+			  <eq name="$notci['type']" value="3">
+              <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <strong>Oh snap!</strong> Change a <a href="" class="alert-link">few things</a> up and try submitting again.
+              </div>
+			  </eq>
+			  <eq name="$notci['type']" value="3">
+              <div class="alert alert-info fade in nomargin">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <h4>Announcements!</h4>
+                <p>Change this and that and try again. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum.</p>
+                <p>
+                  <button class="btn btn-info" type="button">Take this action</button>
+                  <button class="btn btn-white" type="button">Or do this</button>
+                </p>
+              </div>
+              
+			  </eq>
+              </volist>
+              
+              
+              
+            </div>
+          </div><!-- panel -->
+          
+        </div>
+		</div>
+		</gt>
+		
+	  <div class="row">
+
+        <div class="col-sm-6 col-md-3">
+          <div class="panel panel-success panel-stat">
+            <div class="panel-heading">
+
+              <div class="stat">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img src="images/is-user.png" alt="">
+                  </div>
+                  <div class="col-xs-8">
+                    <small class="stat-label">信号</small>
+                    <h1>120</h1>
+                  </div>
+                </div><!-- row -->
+
+                <div class="mb15"></div>
+
+                <div class="row">
+                  <div class="col-xs-6">
+                    <small class="stat-label">长期</small>
+                    <h4>7.80</h4>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <small class="stat-label">短期</small>
+                    <h4>76.43%</h4>
+                  </div>
+                </div><!-- row -->
+              </div><!-- stat -->
+
+            </div><!-- panel-heading -->
+          </div><!-- panel -->
+        </div><!-- col-sm-6 -->
+
+        <div class="col-sm-6 col-md-3">
+          <div class="panel panel-danger panel-stat">
+            <div class="panel-heading">
+
+              <div class="stat">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img src="images/is-money.png" alt="">
+                  </div>
+                  <div class="col-xs-8">
+                    <small class="stat-label">策略</small>
+                    <h1>1250</h1>
+                  </div>
+                </div><!-- row -->
+
+                <div class="mb15"></div>
+
+                <div class="row">
+                  <div class="col-xs-6">
+                    <small class="stat-label">成功</small>
+                    <h4>600</h4>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <small class="stat-label">失败</small>
+                    <h4>650</h4>
+                  </div>
+                </div><!-- row -->
+
+              </div><!-- stat -->
+
+            </div><!-- panel-heading -->
+          </div><!-- panel -->
+        </div><!-- col-sm-6 -->
+
+        <div class="col-sm-6 col-md-3">
+          <div class="panel panel-primary panel-stat">
+            <div class="panel-heading">
+
+              <div class="stat">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img src="images/is-money.png" alt="">
+                  </div>
+                  <div class="col-xs-8">
+                    <small class="stat-label">财务</small>
+                    <h1>$655</h1>
+                  </div>
+                </div><!-- row -->
+
+                <div class="mb15"></div>
+
+                <div class="row">
+                  <div class="col-xs-6">
+                    <small class="stat-label">盈亏</small>
+                    <h4>$32,322</h4>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <small class="stat-label">使用率</small>
+                    <h4>$503,000</h4>
+                  </div>
+                </div><!-- row -->
+              </div><!-- stat -->
+
+            </div><!-- panel-heading -->
+          </div><!-- panel -->
+        </div><!-- col-sm-6 -->
+
+        <div class="col-sm-6 col-md-3">
+          <div class="panel panel-dark panel-stat">
+            <div class="panel-heading">
+
+              <div class="stat">
+                <div class="row">
+                  <div class="col-xs-4">
+                    <img src="images/is-money.png" alt="">
+                  </div>
+                  <div class="col-xs-8">
+                    <small class="stat-label">头寸</small>
+                    <h1>$655</h1>
+                  </div>
+                </div><!-- row -->
+
+                <div class="mb15"></div>
+
+                <div class="row">
+                  <div class="col-xs-6">
+                    <small class="stat-label">交易量</small>
+                    <h4>$32,322</h4>
+                  </div>
+
+                  <div class="col-xs-6">
+                    <small class="stat-label">交易额</small>
+                    <h4>$503,000</h4>
+                  </div>
+                </div><!-- row -->
+
+              </div><!-- stat -->
+
+            </div><!-- panel-heading -->
+          </div><!-- panel -->
+        </div><!-- col-sm-6 -->
+      </div>
+         <div class="row">
+		
+		<block id="memdata" name="AuthoritySubscriber" mode=1 perpage=1 />
+        <div class="col-sm-6 col-md-3">
+    	<div class="panel panel-default widget-profile">
+            <div class="panel-heading">
+              <div class="cover"><img src="/img/bracket/photos/media7.png" alt="Cover Photo"></div>
+            </div>
+            <div class="panel-body">
+              <img src="/img/bracket/photos/loggeduser.png" class="widget-profile-img thumbnail" alt="80x80">
+              <div class="widget-profile-title">
+                <h4>那山那水。</h4>
+                <small><i class="fa fa-map-marker"></i> San Francisco, California</small>
+              </div>
+              <blockquote class="serif italic text-center">
+                天下事，必了了之。必来来之.
+              </blockquote>
+              <div class="row">
+                <div class="col-xs-6 text-center">
+                  <span>1,100 知识</span>
+                </div>
+                <div class="col-xs-6 text-center">
+                  <span>36 任务</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+		<block id="missionList" name="WorkflowMission" mode=1 perpage=10 />
+          <div class="col-sm-4 col-md-4">
+          <div class="panel panel-default panel-alt widget-messaging">
+          <div class="panel-heading">
+              <h3 class="panel-title">待办事项</h3>
+            </div>
+            <div class="panel-body">
+              <ul>
+              	<volist id="mission" name="missionList.data">
+                <li>
+                  <small class="pull-right">{$mission['dateline']|fdateline}</small>
+                  <h4 class="sender">{$mission.title}</h4>
+                  <small>{$mission.summary}</small>
+                </li>
+                </volist>
+              </ul>
+            </div><!-- panel-body -->
+          </div><!-- panel -->
+          
+        </div>
+     </div>
+	  <!-- panel -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="" class="panel-close">&times;</a>
+            <a href="" class="minimize">&minus;</a>
+          </div>
+          <h4 class="panel-title">新闻/公告/知识库</h4>
+        </div>
+        <div class="panel-body">
+         <div class="row">
+
+          <block id="documentationList" name="IntelligenceDocumentation" start=1 perpage=10 status=0 />
+        <div class="col-sm-6 col-md-4">
+          <div class="panel panel-default panel-alt widget-messaging">
+            <div class="panel-body">
+              <ul>
+              <volist id="article" name="documentationList['data']">
+                <li>
+                	<a href="{$article.url}" target="_blank">
+                  <small class="pull-right">{$article['dateline']|fdateline}</small>
+                  <h4 class="sender">{$article.title}</h4>
+                  <small>{$article.summary}</small>
+                  </a>
+                </li>
+				</volist>
+              </ul>
+            </div><!-- panel-body -->
+          </div><!-- panel -->
+        </div><!-- col-sm-6 -->
+		
+
+
+      </div>
+        </div><!-- panel-body -->
+      </div><!-- panel -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="" class="panel-close">&times;</a>
+            <a href="" class="minimize">&minus;</a>
+          </div>
+          <h4 class="panel-title">业绩/指标</h4>
+        </div>
+        <div class="panel-body">
+        	
+          <div class="row">
+                <div class="col-sm-12">
+                  <div id="basicflot"><canvas class="flot-base" width="372" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 372px; height: 300px;"></canvas><div class="flot-text" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; font-size: smaller; color: rgb(84, 84, 84);"><div class="flot-x-axis flot-x1-axis xAxis x1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 34px; text-align: center;">0</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 88px; text-align: center;">1</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 143px; text-align: center;">2</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 197px; text-align: center;">3</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 251px; text-align: center;">4</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 306px; text-align: center;">5</div><div class="flot-tick-label tickLabel" style="position: absolute; max-width: 53px; top: 278px; left: 360px; text-align: center;">6</div></div><div class="flot-y-axis flot-y1-axis yAxis y1Axis" style="position: absolute; top: 0px; left: 0px; bottom: 0px; right: 0px; display: block;"><div class="flot-tick-label tickLabel" style="position: absolute; top: 258px; left: 9px; text-align: right;">0.0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 215px; left: 9px; text-align: right;">2.5</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 172px; left: 9px; text-align: right;">5.0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 129px; left: 9px; text-align: right;">7.5</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 86px; left: 1px; text-align: right;">10.0</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 43px; left: 1px; text-align: right;">12.5</div><div class="flot-tick-label tickLabel" style="position: absolute; top: 1px; left: 1px; text-align: right;">15.0</div></div></div><canvas class="flot-overlay" width="372" height="300" style="direction: ltr; position: absolute; left: 0px; top: 0px; width: 372px; height: 300px;"></canvas><div class="legend"><div style="position: absolute; width: 79px; height: 42px; top: 16px; left: 43px; background-color: rgb(255, 255, 255); opacity: 0.85;"> </div><table style="position:absolute;top:16px;left:43px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #1CAF9A;overflow:hidden"></div></div></td><td class="legendLabel">Uploads</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid #428BCA;overflow:hidden"></div></div></td><td class="legendLabel">Downloads</td></tr></tbody></table></div></div>
+                </div><!-- col-sm-8 -->
+              </div>
+        </div><!-- panel-body -->
+      </div><!-- panel -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+            <a href="" class="panel-close">&times;</a>
+            <a href="" class="minimize">&minus;</a>
+          </div>
+          <h4 class="panel-title">常用功能</h4>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+		  
+		  
+            
+          </div>
+        </div><!-- panel-body -->
+      </div>
+		
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+<script src="/js/flot/jquery.flot.min.js"></script>
+<script src="/js/flot/jquery.flot.resize.min.js"></script>
+<script src="/js/flot/jquery.flot.spline.min.js"></script>
+<script src="/js/morris.min.js"></script>
+<script src="/js/1.0/quotation/dashboard.js"></script>
+</section>
+<template file="/footer" />

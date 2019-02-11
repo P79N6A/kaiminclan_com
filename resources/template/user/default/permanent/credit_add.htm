@@ -1,0 +1,141 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.creditId" value="0">
+<block id="creditData" name="PermanentCredit" creditId=0 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">授信管理-新授信</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="creditId" value="{$creditData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">主题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$creditData.data.title}" placeholder="主题" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">资金</label>
+              <div class="col-sm-2">
+                <input type="text" name="amount" required value="{$creditData.data.amount}" placeholder="额度" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" name="debt" readonly="readonly" value="{$creditData.data.debt}" placeholder="债务" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" name="balance" readonly="readonly" value="{$creditData.data.balance}" placeholder="余额" class="form-control">
+              </div>
+            </div>
+
+            <block id="bankcardtList" name="MechanismBankcard" />
+            <div class="form-group">
+                <label class="col-sm-3 control-label">托管银行</label>
+                <div class="col-sm-6">
+                    <select class="select2" name="bank_identity" data-placeholder="Choose One" required>
+                        <option value="">选择</option>
+                        <volist id="bankcardt" name="bankcardtList.data">
+                            <option value="{$bankcardt.identity}"<eq name="$creditData['data']['bank_identity']" value="$bankcardt['identity']"> selected="selected"</eq>>{$bankcardt.title}</option>
+
+                        </volist>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">计息方式</label>
+                <div class="col-sm-3">
+                  <select class="select2" name="style" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+					<option value="0" <eq name="$creditData['data']['style']['value']" value="0">selected="selected"</eq>>年</option>
+					<option value="1" <eq name="$creditData['data']['style']['value']" value="1">selected="selected"</eq>>季</option>
+					<option value="2" <eq name="$creditData['data']['style']['value']" value="2">selected="selected"</eq>>月</option>
+					<option value="3" <eq name="$creditData['data']['style']['value']" value="3">selected="selected"</eq>>周</option>
+					<option value="4" <eq name="$creditData['data']['style']['value']" value="4">selected="selected"</eq>>日</option>
+                  </select>
+                </div>
+              <div class="col-sm-3">
+                <input type="text" name="interest" required value="{$creditData.data.interest}" placeholder="利息" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">结算周期</label>
+              <div class="col-sm-3">
+                <input type="text" name="checkout" required value="{$creditData.data.checkout}" placeholder="结账日" class="form-control">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" name="statement" required value="{$creditData.data.statement}" placeholder="账单日" class="form-control">
+              </div>
+            </div>          
+            
+            <block id="channelList" name="PermanentFashion" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">分类</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="channel_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="channel" name="channelList.data">
+                    <option value="{$channel.identity}"<eq name="$creditData['data']['channel_identity']" value="$channel['identity']"> selected="selected"</eq>>{$channel.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$creditData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/permanent/credit.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/permanent/credit_add.js"></script>
+<template file="/footer" />

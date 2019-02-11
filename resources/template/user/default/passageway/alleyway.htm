@@ -1,0 +1,127 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+     	<div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/passageway/newalleyway.html">新建</a>
+          </div>
+          <h4 class="panel-title">渠道</h4>
+          <p>Use any button to trigger a dropdown menu by placing it within a .btn-group and providing the proper menu markup.</p>
+        </div>
+        
+        
+        <div class="panel-body">
+          <div class="table-responsive">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+          
+          <block id="alleywayList" name="PassagewayAlleyway" channelId=0 start=1 perpage=10 />
+          <table class="table table-striped dataTable no-footer" id="table2" role="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr >
+				 <th width="150">编号</th>
+				 <th >名称</th>
+				 <th width="140">分类</th>
+				 <th width="100">状态</th>
+                 <th width="180">最后修改</th>
+                   <th width="300">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$alleywayList.total" value="0">
+              <tr class="gradeA odd" role="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="alleyway" name="alleywayList.data">
+              <tr class="gradeA odd" role="row">
+                    <td>{$alleyway.sn}</td>
+                    <td>{$alleyway.title}</td>
+                    <td>{$alleyway.channel.title}</td>
+                    <td>{$alleyway.status.label}</td>
+                    <td>{$alleyway['lastupdate']|fdateline}</td>
+                    <td>
+                    	<eq name="$alleyway['status']['value']" value="0">
+                        <a class="btn btn-default-alt">禁用</a>
+                        </eq>
+                    	<eq name="$alleyway['status']['value']" value="2">
+                        <a class="btn btn-primary-alt">启用</a>
+                        </eq>
+                    	<eq name="$alleyway['status']['value']" value="1">
+                        <a class="btn btn-success-alt" href="/passageway/newalleyway_{$alleyway.identity}.html">修改</a>
+                        </eq>
+                        <a class="btn btn-default-alt" href="/passageway/alleywayinfo_{$alleyway.identity}.html">查看</a>
+                    	<eq name="$alleyway['status']['value']" value="2">
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$alleyway.identity}">删除</a>
+                        </eq>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+           
+            <php>$pageData = $this->page($alleywayList['total'],$alleywayList['perpage'],$alleywayList['start']);</php>
+           <div class="dataTables_info" id="table2_info" role="status" aria-live="polite">Showing {$alleywayList['start']} to {$alleywayList['perpage']} of {$alleywayList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/passageway/alleyway.js"></script>
+<template file="/footer" />

@@ -1,0 +1,186 @@
+<template file="/broker/header" />
+<div class="popular">
+	<div class="shade"></div>
+	<div class="flash"></div>
+</div>
+<div class="focus">
+	<div class="box clearfix">
+		<div class="fn_left board">
+			<ul class="clearfix tab">
+				<li class="hover" data-type="today"><span>今日焦点</span></li>
+				<li data-type="forex"><span>外汇</span></li>
+				<li data-type="stock"><span>证券</span></li>
+				<li data-type="futures"><span>期货</span></li>
+				<li data-type="supervise"><span>监管</span></li>
+			</ul>
+			<div class="today clearfix item show">
+				<div class="fn_left media">
+					sfsdfds
+				</div>
+				<block id="policyList" name="IntelligenceDocumentation" catalogueId=0 perpage=5 />
+				<div class="fn_left bulletin">
+					<ul>
+						<php>$cnt = 0</php>
+						<volist id="policy" name="policyList.data">
+						<li>
+							<a href="/broker/news_{$policy.identity}.html" target="_blank">{$policy.title}</a>
+							<lt name="$cnt" value="2">
+							<p>{$policy.summary}</p>
+							</lt>
+						</li>
+						<php>$cnt += 1</php>
+						</volist>
+					</ul>
+				</div>
+			</div>
+			<div class="forex clearfix item">
+				<div class="fn_left media">
+					sfsdfds
+				</div>
+				<block id="policyList" name="IntelligenceDocumentation" catalogueId=0 perpage=5 />
+				<div class="fn_left bulletin">
+					<ul>
+						<php>$cnt = 0</php>
+						<volist id="policy" name="policyList.data">
+						<li>
+							<a href="/broker/news_{$policy.identity}.html" target="_blank">{$policy.title}</a>
+							<lt name="$cnt" value="2">
+							<p>{$policy.summary}</p>
+							</lt>
+						</li>
+						<php>$cnt += 1</php>
+						</volist>
+					</ul>
+				</div>
+			</div>
+			<div class="stock clearfix item">
+				<div class="fn_left media">
+					sfsdfds
+				</div>
+				<block id="policyList" name="IntelligenceDocumentation" catalogueId=0 perpage=5 />
+				<div class="fn_left bulletin">
+					<ul>
+						<php>$cnt = 0</php>
+						<volist id="policy" name="policyList.data">
+						<li>
+							<a href="/broker/news_{$policy.identity}.html" target="_blank">{$policy.title}</a>
+							<lt name="$cnt" value="2">
+							<p>{$policy.summary}</p>
+							</lt>
+						</li>
+						<php>$cnt += 1</php>
+						</volist>
+					</ul>
+				</div>
+			</div>
+			<div class="futures clearfix item">
+				<div class="fn_left media">
+					sfsdfds
+				</div>
+				<block id="policyList" name="IntelligenceDocumentation" catalogueId=0 perpage=5 />
+				<div class="fn_left bulletin">
+					<ul>
+						<php>$cnt = 0</php>
+						<volist id="policy" name="policyList.data">
+						<li>
+							<a href="/broker/news_{$policy.identity}.html" target="_blank">{$policy.title}</a>
+							<lt name="$cnt" value="2">
+							<p>{$policy.summary}</p>
+							</lt>
+						</li>
+						<php>$cnt += 1</php>
+						</volist>
+					</ul>
+				</div>
+			</div>
+			<div class="supervise clearfix item">
+				<div class="fn_left media">
+					sfsdfds
+				</div>
+				<block id="policyList" name="IntelligenceDocumentation" catalogueId=0 perpage=5 />
+				<div class="fn_left bulletin">
+					<ul>
+						<php>$cnt = 0</php>
+						<volist id="policy" name="policyList.data">
+						<li>
+							<a href="/broker/news_{$policy.identity}.html" target="_blank">{$policy.title}</a>
+							<lt name="$cnt" value="2">
+							<p>{$policy.summary}</p>
+							</lt>
+						</li>
+						<php>$cnt += 1</php>
+						</volist>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="fn_right sales">
+			<h2>今日热销</h2>
+			<block id="brokerList" name="IntercalateBroker" perpage=4 />
+			<ul>
+				<php>$cnt = 0</php>
+				<volist id="broker" name="brokerList.data">
+				<li <gt name="$cnt" value="2">class="last"</gt>>
+					<img src="{$broker.cover.attach}" />
+					<a href="/broker/news_{$broker.identity}.html" target="_blank">{$broker.fullname}</a>
+				</li>
+				<php>$cnt += 1</php>
+				</volist>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="box clearfix">
+	<div class="fn_left">
+		<div class="">
+			<h2>热门经纪</h2>
+			<a href="">更多</a>
+		</div>
+		<ul>
+			<li>外汇</li>
+			<li>证券</li>
+			<li>期货</li>
+		</ul>
+		<block id="brokerList" name="IntercalateBroker" perpage=3 industryId=1 />
+		<div class="broker">
+			<volist id="broker" name="brokerList.data">
+			<div class="item">
+				<img src="{$broker.cover.attach}" />
+				<h3>{$broker.fullname}</h3>
+				<p>{$broker.summary}</p>
+				
+			</div>
+				</volist>
+		</div>
+		<block id="brokerList" name="IntercalateBroker" perpage=3 industryId=2 />
+		<div class="broker">
+			<volist id="broker" name="brokerList.data">
+			<div class="item">
+				<img src="{$broker.cover.attach}" />
+				<h3>{$broker.fullname}</h3>
+				<p>{$broker.summary}</p>
+				
+			</div>
+				</volist>
+		</div>
+		<block id="brokerList" name="IntercalateBroker" perpage=3 industryId=3 />
+		<div class="broker">
+			<volist id="broker" name="brokerList.data">
+			<div class="item">
+				<img src="{$broker.cover.attach}" />
+				<h3>{$broker.fullname}</h3>
+				<p>{$broker.summary}</p>
+				
+			</div>
+				</volist>
+		</div>
+	</div>
+	<div class="fn_right">
+		<div class="">
+			<h2>经纪动态</h2>
+			<a href="">更多</a>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/js/brokerfactory/bootstrap.js"></script>
+<template file="/broker/footer" />

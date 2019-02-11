@@ -1,0 +1,146 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.exampleId" value="0">
+<block id="exampleData" name="FaultinessExample" exampleId=0 start=1 perpage=1status="-1" />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">用例管理-新用例</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="exampleId" value="{$exampleData.data.identity}" />
+
+            
+            <block id="catalogueList" name="FaultinessCatalogue" />            
+			<div class="form-group">
+				<label class="col-sm-3 control-label">用例类型</label>
+				<div class="col-sm-6">
+				  <select name="catalogue_identity" class="select2" data-placeholder="Choose One" required>
+					<option value="0">选择</option>
+					<volist id="catalogue" name="catalogueList.data">
+					<option value="{$catalogue.identity}">{$catalogue.title}</option>
+					</volist>
+				  </select>
+				</div>
+			</div>
+            
+            <block id="channelList" name="FaultinessChannel" />            
+			<div class="form-group">
+				<label class="col-sm-3 control-label">测试类型</label>
+				<div class="col-sm-6">
+				  <select name="channel_identity" class="select2" data-placeholder="Choose One" required>
+					<option value="0">选择</option>
+					<volist id="channel" name="channelList.data">
+					<option value="{$channel.identity}">{$channel.title}</option>
+					</volist>
+				  </select>
+				</div>
+			</div>
+            
+            <block id="facilityList" name="FaultinessBulletin" />            
+			<div class="form-group">
+				<label class="col-sm-3 control-label">测试工具</label>
+				<div class="col-sm-6">
+				  <select name="facility_identity" class="select2" data-placeholder="Choose One" required>
+					<option value="0">选择</option>
+					<volist id="facility" name="facilityList.data">
+					<option value="{$facility.identity}">{$facility.title}</option>
+					</volist>
+				  </select>
+				</div>
+			</div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" placeholder="标题" value="{$exampleData.data.title}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">功能特性</label>
+              <div class="col-sm-6">
+                <input type="text" name="performance" placeholder="功能特性" value="{$exampleData.data.performance}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">前置条件</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="frontend" rows="5">{$exampleData.data.frontend}</textarea>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">用例介绍</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="content" rows="5">{$exampleData.data.content}</textarea>
+              </div>
+            </div>
+            
+            <div class="form-group">
+				  <label class="col-sm-3 control-label" for="disabledinput">优先级</label>
+				  <div class="col-sm-6">
+					 <input type="password" name="weight" placeholder="优先级" class="form-control">
+				  </div>
+				</div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="5">{$exampleData.data.remark}</textarea>
+              </div>
+            </div>
+            
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/faultiness/example.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/faultiness/example_add.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

@@ -1,0 +1,104 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">信号</h4>
+          <p>管理，修改，新建策略</p>
+        </div>
+        <div class="panel-body">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+          <block id="catalogList" name="FightSignal" start=1 perpage=10 status=-1 />
+          <table class="table table-striped dataTable no-footer" id="table2" catalog="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalog="row">
+					<th >编号</th>
+					<th style="width: 415px;">品种</th>
+					<th  style="width: 272px;">最新价</th>
+					<th  style="width: 200px;">趋势</th>
+					<th style="width: 200px;">随机</th>
+					<th style="width: 400px;">时间</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$catalogList.total" value="0">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="catalog" name="catalogList.data">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="sorting_1">{$catalog.sn}</td>
+                    <td class="sorting_1">{$catalog.title}</td>
+                    <td>{$catalog.channel.title}</td>
+                    <td>{$catalog.status.label}</td>
+                    <td>{$catalog[dateline]|fdateline}</td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($catalogList['total'],$catalogList['perpage'],$catalogList['start']);</php>
+           <div class="dataTables_info" id="table2_info" >Showing {$catalogList['start']} to {$catalogList['perpage']} of {$catalogList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/fight/signal.js"></script>
+<template file="/footer" />

@@ -1,0 +1,62 @@
+a { text-decoration:none; color: }
+
+.header { height:49px; border-bottom:1px solid #ececec; padding:0 22px; position:relative; }
+.header .logo { font-size:24px; font-weight:bold; padding:10px 0; height:29px; line-height:29px; }
+
+ul.menu {  height:49px; }
+ul.menu li { float:left; padding:0 13px; padding-top:13px; padding-bottom:7px; height:24px; line-height:24px; }
+ul.menu li:hover { border-bottom:5px solid #f30; }
+ul.menu li:hover a { color:#f30; font-size:16px;  }
+ul.menu li a:link,ul.menu li a:visited { color:#000;  }
+
+ul.menu li .box { height:600px; background:#ededed; position:absolute; top:50px; left:22px; right:22px; border-bottom:#ececec 1px solid; display: none; }
+
+.shortcut { width:30px; position:relative; }
+.shortcut span { display:block; height:50px; line-height:50px; text-align:center; cursor:pointer; }
+.shortcut ul.menu { display: none;}
+
+.box { width: 1400px; margin: 0 auto;  }
+
+.flash { height: 390px; background:#f3f3f3; }
+.popularize { padding: 30px 0; min-height: 420px; }
+.popularize .title { font-size: 36px; color: #333; text-align: center; margin-bottom: 35px; font-weight: bold;}
+.popularize .item { float: left; width: 448px; border: #ededed 1px solid; margin-right: 20px; padding-bottom: 50px;}
+.popularize .item img { width: 100%; height: 240px;}
+.popularize .item h3 { padding: 30px 10px; font-size: 24px; line-height: 32px;}
+.popularize .item p { padding: 0 10px; padding-bottom: 30px;}
+.popularize .item-last { margin-right: 0!important;}
+
+.perceive { padding-top: 60px; padding-bottom: 120px; background: #4178be;}
+.perceive .title { font-size: 36px; color: #fff; text-align: center; margin-bottom: 35px; font-weight: bold;}
+.perceive .note { font-size: 18px; color: #fff; text-align: center; padding-bottom: 30px;}
+.perceive .item { float: left; width: 448px; border: #ededed 1px solid; margin-right: 20px; padding-bottom: 50px; background: #fff; text-align: center;}
+.perceive .item img { width: 100%; height: 240px;}
+.perceive .item h3 { padding: 30px 10px; font-size: 24px; line-height: 32px;}
+.perceive .item p { padding: 0 10px; padding-bottom: 30px;}
+.perceive .item-last { margin-right: 0!important;}
+
+.product { padding-top: 10px; padding-bottom: 30px; background: #ececec; }
+.product .head { float:left; text-align:left; width:400px; font-size: 32px; font-weight: bold; }
+.product .list { width:1000px; float:right; }
+.product .list .item { float:left; width:300px; }
+.product .list .item img { width: 100%;}
+.product .list .item h3 { padding: 25px 0; font-weight: 500; line-height: 32px; font-size: 24px;}
+.product .list .item a { display: block; height: 20px; border: #0000CC 2px solid; padding: 10px 20px; width: 130px; margin-top: 46px; }
+
+.wisdom { padding-top: 80px; padding-bottom: 60px; background: #152935; }
+.wisdom .title { font-size: 36px; color: #fff; text-align: center; margin-bottom: 35px;}
+.wisdom .list { width: 820px; margin: 0 auto;}
+.wisdom .list .item { float: left; width: 410px; color: #fff; padding: 25px 0; font-size: 26px;}
+.help { padding: 80px 0; background:#323232; }
+.help .title { font-size:26px; color:#fff; padding-bottom:30px; text-align:center; }
+.help .list {}
+.help .list .item { float:left; width:280px; color:#fff; text-align:center; }
+
+.footer { background: #f4f4f4; padding-top:40px; padding-bottom: 20px;}
+
+.footer .nav { padding-bottom:50px; }
+.footer .nav ul { float:left; width:350px; }
+.footer .nav ul li span { color:#333; font-size:18px; display:block; padding-bottom:15px; font-weight:bold; }
+.footer .nav ul li a { color:#666; font-size:16px; display:block; padding:7px 0; }
+.footer .bottom { border-top: #333 1px solid; padding: 10px 0;}
+.footer .bottom a { color: #000000;}

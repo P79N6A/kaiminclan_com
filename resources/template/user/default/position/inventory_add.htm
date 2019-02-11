@@ -1,0 +1,103 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.inventoryId" value="0">
+<block id="inventoryData" name="PositionInventory" inventoryId=0 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">库存管理-库存编辑</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="inventoryId" value="{$inventoryData.data.identity}" />
+          <input type="hidden" name="inventory_identity" value="{$inventoryData.data.inventory_identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$inventoryData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+			<div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$inventoryData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/position/inventory.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(function(){
+  var $validator = jQuery("#catalogForm").validate({
+    highlight: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+    },
+    success: function(element) {
+      jQuery(element).closest('.form-group').removeClass('has-error');
+    },
+	submitHandler:function(form){
+		__AjaxCommon("/Position/InventorySave",$(form).serialize(),function(result){
+			console.log(result);
+			if(result.status == 200){
+				window.location.href="/position/inventory.html";
+			}else{
+				alert(result.msg);
+			}
+		},'json','POST');
+	}
+  });
+
+  jQuery(".select2").select2({
+    width: '100%',
+    minimumResultsForSearch: -1
+  });
+  
+});
+</script>
+<template file="/footer" />

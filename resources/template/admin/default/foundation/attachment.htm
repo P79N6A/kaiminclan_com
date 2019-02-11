@@ -1,0 +1,170 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">附件设置</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+			<block id="registryData" name="FoundationRegistry" bz="attachment" />
+		
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+			
+              <div id="basicWizard" class="basic-wizard">
+
+             <ul class="nav nav-pills nav-justified">
+                  <li class="active"><a href="#tab1" data-toggle="tab">基本</a></li>
+                  <li><a href="#tab2" data-toggle="tab"> 本地</a></li>
+                  <li><a href="#tab3" data-toggle="tab"> 远程</a></li>
+                </ul>
+				<div class="tab-content">
+                  <div class="tab-pane active" id="tab1">
+			
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[attachment][title]" placeholder="标题" value="{$registryData.data.title}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">目录</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[attachment][folder]" placeholder="目录" value="{$registryData.data.folder}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">文件</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[attachment][primaltplname]" placeholder="文件" value="{$registryData.data.primaltplname}" class="form-control">
+              </div>
+            </div>
+                  </div>
+                  <div class="tab-pane" id="tab2">
+                    
+            <div class="form-group">
+              <label class="col-sm-3 control-label">路径</label>
+              <div class="col-sm-6">
+				  <input type="text" name="registry[attachment][domain]" placeholder="路径" value="{$registryData.data.domain}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">本地URL</label>
+              <div class="col-sm-6">
+                  <input type="text" name="registry[attachment][url]" value="{$registryData.data.url}" class="form-control">
+              </div>
+			  
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">文件大小</label>
+              <div class="col-sm-6">
+                  <input type="text" name="registry[attachment][filesize]" value="{$registryData.data.filesize}" class="form-control">
+              </div>
+			  
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">黑名单</label>
+              <div class="col-sm-6">
+                  <input type="text" name="registry[attachment][blanklist]" value="{$registryData.data.blanklist}" class="form-control">
+              </div>
+			  
+            </div>
+            
+            
+                  </div>
+                  <div class="tab-pane" id="tab3">
+                     <div class="form-group">
+              <label class="col-sm-3 control-label">主机</label>
+              <div class="col-sm-4">
+                <input type="text" name="registry[attachment][host]" placeholder="主机" value="{$registryData.data.host}" class="form-control">
+              </div>
+              <div class="col-sm-2">
+                <input type="text" name="registry[attachment][port]" placeholder="端口" value="{$registryData.data.port}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">账户</label>
+              <div class="col-sm-3">
+                <input type="text" name="registry[attachment][username]" placeholder="用户名" value="{$registryData.data.username}" class="form-control">
+              </div>
+              <div class="col-sm-3">
+                <input type="text" name="registry[attachment][password]" placeholder="密码" value="{$registryData.data.password}" class="form-control">
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">路径</label>
+              <div class="col-sm-6">
+                <input type="text" name="registry[attachment][folder]" placeholder="路径" value="{$registryData.data.folder}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">文件大小</label>
+              <div class="col-sm-6">
+                  <input type="text" name="registry[attachment][filesize]" value="{$registryData.data.filesize}" class="form-control">
+              </div>
+			  
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">黑名单</label>
+              <div class="col-sm-6">
+                  <input type="text" name="registry[attachment][blanklist]" value="{$registryData.data.blanklist}" class="form-control">
+              </div>
+			  
+            </div>
+                  </div>
+                  </div>
+                  
+                </div><!-- tab-content -->
+
+            
+            
+           
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <button type="reset" class="btn btn-default">重置</button>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/foundation/attachment.js"></script>
+<template file="/footer" />

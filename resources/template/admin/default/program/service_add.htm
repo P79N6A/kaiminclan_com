@@ -1,0 +1,143 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.serviceId" value="0">
+<block id="serviceData" name="ProgramService" serviceId=0 perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">服务管理-新服务</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="serviceId" value="{$serviceData.data.identity}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">服务名称</label>
+              <div class="col-sm-6">
+                <input type="text" id="title" name="title" value="{$serviceData.data.title}" required placeholder="标题" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">显示名称</label>
+              <div class="col-sm-6">
+                <input type="text" name="nickname" placeholder="显示名称" value="{$serviceData.data.nickname}" class="form-control">
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">描述</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="2" name="summary">{$serviceData.data.summary}</textarea>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">脚本名称</label>
+              <div class="col-sm-6">
+                <input type="text" name="script" placeholder="脚本名称" value="{$serviceData.data.script}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">启动参数</label>
+              <div class="col-sm-6">
+                <input type="text" name="parameter" placeholder="启动参数" value="{$serviceData.data.parameter}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">启动类型</label>
+                <div class="col-sm-6">
+                  <select name="startup" class="select2" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <option value="0">手动</option>
+                    <option value="1">自动</option>
+                    <option value="2">禁用</option>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">状态</label>
+                <div class="col-sm-6">
+                  <select name="status" class="select2" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <option value="0">启动</option>
+                    <option value="1">停止</option>
+                    <option value="2">暂停</option>
+                    <option value="3">恢复</option>
+                  </select>
+                </div>
+            </div>
+            
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/program/service.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#basicForm").validate({
+		highlight: function(element) {
+		  jQuery(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+		},
+		success: function(element) {
+		  jQuery(element).closest('.form-group').removeClass('has-error');
+		},
+		submitHandler:function(form){
+		__AjaxCommon("/Program/ServiceSave",$(form).serialize(),function(result){
+				console.log(result);
+				if(result.status == 200){
+					window.location.href="/program/service.html";
+				}else{
+					alert(result.msg);
+				}
+			},'json','POST');
+		}
+  });
+  jQuery(".select2").select2({
+    width: '100%',
+    minimumResultsForSearch: -1
+  });
+
+});
+</script>
+<template file="/footer" />

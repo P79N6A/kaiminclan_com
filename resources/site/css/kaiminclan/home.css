@@ -1,0 +1,30 @@
+
+
+.recommend { height:5rem; background:#ededed; }
+
+.recommend .swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.recommend .swiper-slide { text-align: center;  font-size: 18px; -webkit-box-align: center;  -ms-flex-align: center;  -webkit-align-items: center;  align-items: center; }
+.recommend .swiper-slide { display: -webkit-box;  display: -ms-flexbox;  display: -webkit-flex;  display: flex;  -webkit-box-pack: center;  -ms-flex-pack: center;  -webkit-justify-content: center;  justify-content: center; }
+
+.promotion { padding:1rem 0.5rem; }
+.promotion h2 { text-align:center; padding-bottom:0.6rem; font-size: 0.426666rem; }
+.promotion .list {}
+.promotion .list .item { border:#ccc 1px solid; padding:0.4rem; margin-bottom:0.5rem; }
+.promotion .list .item h3 { font-size:0.32rem; margin-bottom:0.25rem; }
+.promotion .list .item p { font-size:0.293333rem; margin-bottom:0.25rem; }
+.promotion .list .item a { font-size:0.2rem;}
+
+.production { background:#ececec; padding:25px; }
+.production h2 { color:#000; text-align:center; font-size:0.426666rem; font-weight:400; }
+
+
+.wisdom { background:#152935; padding:25px; }
+.wisdom h2 { color:#fff; text-align:center; font-size:0.426666rem; font-weight:400; }
+
+
+.help { background:#323232; padding:25px; }
+.help h2 { color:#fff; text-align:center; }
+.help h2 { color:#fff; text-align:center; font-size:0.426666rem; font-weight:400; }

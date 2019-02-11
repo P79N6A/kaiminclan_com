@@ -1,0 +1,90 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+	<gt name="$location.visitId" value="0">
+	<block id="visitData" name="OpportunityVisit" visitId=0 start=1 perpage=1 />
+    </gt>
+	<div class="contentpanel">
+	<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">回访-新回访</h4>
+        </div>
+          <form id="roleForm" class="form-horizontal form-bordered">
+		  <input type="hidden" name="visitId" value="{$visitData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">姓名</label>
+              <div class="col-sm-6">
+                <input type="text" name="fullname" required value="{$visitData.data.fullname}" placeholder="姓名" class="form-control">
+              </div>
+            </div>
+            <block id="catalogueList" name="CustomerDistinction" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">类型</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="distinction_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="catalogueList.data">
+                    <option value="{$catalogue.identity}"<eq name="$visitData['data']['distinction_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">手机号码</label>
+              <div class="col-sm-6">
+                <input type="text" name="mobile" required value="{$visitData.data.mobile}" placeholder="手机号码" class="form-control">
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="5">{$visitData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/opportunity/visit.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+  <!-- rightpanel -->
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/opportunity/visit_add.js"></script>
+<template file="/footer" />

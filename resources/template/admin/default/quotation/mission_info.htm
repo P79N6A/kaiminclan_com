@@ -1,0 +1,94 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.missionId" value="0">
+<block id="missionData" name="QuotationMission" missionId=0 perpage=1 status=-1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">主题管理-新主题</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+		
+          
+          <form id="roleForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="missionId" value="{$missionData.data.identity}" />
+			
+              <div id="basicWizard" class="basic-wizard">
+
+			
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" placeholder="标题" value="{$missionData.data.title}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <input type="text" name="remark" placeholder="备注" value="{$missionData.data.remark}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">状态</label>
+                <div class="col-sm-6">
+                  <select name="status" class="select2" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <option value="0"<eq name="$missionData['data']['status']" value="0"> selected="selected"</eq>>启用</option>
+                    <option value="1"<eq name="$missionData['data']['status']" value="1"> selected="selected"</eq>>禁用</option>
+                  </select>
+                </div>
+            </div>
+                    
+
+            
+            
+           
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/theme/theme.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/quotation/mission_add.js"></script>
+<template file="/footer" />

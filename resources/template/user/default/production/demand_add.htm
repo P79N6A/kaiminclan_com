@@ -1,0 +1,101 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">需求管理-新需求</h4>
+        </div>
+          <form id="designForm" class="form-horizontal form-bordered">
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required placeholder="标题" value="{$demandData.data.title}" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">图片</label>
+                <div class="col-sm-6">
+                    <div class="col-xs-6" id="click_upload_cover">
+                        <div class="panel panel-warning panel-alt widget-today">
+                            <img src="{$modularData.data.cover}" width="150" height="100" />
+                            <input type="hidden" name="attachment_identity" value="{$modularData.data.attachment_identity}" />
+                        </div>
+                    </div>
+                    <div id="click_upload_cover_error"></div>
+                    <div id="click_upload_cover_box"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">介绍</label>
+                <div class="col-sm-6">
+                    <textarea class="form-control" rows="5" name="content">{$demandData.data.content}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">原型</label>
+                <div class="col-sm-6">
+                    <input type="text" name="prototype" placeholder="原型" value="{$demandData.data.prototype}" class="form-control">
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5">{$demandData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/production/demand.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/plupload/js/plupload.full.min.js"></script>
+<script src="/js/1.0/attachment/upload.js"></script>
+<script src="/js/plupload/js/plupload.full.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/production/demand_add.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

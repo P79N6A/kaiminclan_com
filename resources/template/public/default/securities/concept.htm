@@ -1,0 +1,39 @@
+<template file="top" />
+<link rel="stylesheet" href="/css/stock/concept.css"/>
+
+<title>概念 </title>
+</head>
+
+<body>
+<template file="menu" />
+    <block id="conceptList" name="SecuritiesConcept" start=1 perapge=20 />
+<div class="box clearfix">
+	<div class="fn_left w700">
+	<volist id="concept" name="conceptList.data">
+	<div class="item clearfix">
+    	<div class="icon fn_left">
+        	<img src="" />
+        </div>
+        <div class="info fn_right">
+        	<div class="clearfix">
+            	<h2 class="fn_left"><a href="/stock/idea_{$concept.identity}.html">{$concept.title}</a></h2>
+                <button class="fn_right" type="button" data-id="{$concept.identity}">关注</button>
+            </div>
+            <p>{$concept.summary}</p>
+        </div>
+    </div>
+    </volist>
+    </div>
+    <div class="fn_right">
+    	<div class="block">
+        	<div class="title">最新热点</div> 		           
+    		<block id="newsList" name="IntelligenceDocumentation" catalogueId=47 start=1 perpage=10 />
+            <ul>
+            	<volist id="news" name="newsList.data">
+            	<li><a href="/stock/view_{$news.identity}.html" target="_blank">{$news.title}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</div>
+<template file="bottom" />

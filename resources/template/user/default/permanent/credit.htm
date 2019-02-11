@@ -1,0 +1,156 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/permanent/newcredit.html">新建</a>
+          </div>
+          <h4 class="panel-title">授信管理</h4>
+          <p>删除，编辑，新建授信</p>
+        </div>
+        <div class="panel-body">
+			 <div class="row">
+				<form id="filterForm" method="get" >
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<block id="platformList" name="MechanismBankcard" />
+					  <select id="searchCurrencyId" name="bankcardId" class="select2" data-placeholder="选择机构">
+						<option value="">--机构--</option>
+						<volist id="platform" name="platformList.data">
+						<option value="{$platform.identity}" <eq name="$location.bankcardId" value="$platform['identity']">selected="selected"</eq>>{$platform.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-3">
+					<block id="platformList" name="PermanentFashion" />
+					  <select id="searchCurrencyId" name="fashionId" class="select2" data-placeholder="选择类型">
+						<option value="">--类型--</option>
+						<volist id="platform" name="platformList.data">
+						<option value="{$platform.identity}" <eq name="$location.fashionId" value="$platform['identity']">selected="selected"</eq>>{$platform.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$location.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <button type="reset" class="btn btn-default">取消</button>
+					</div>
+				</div>
+				</form>
+			 </div>
+          <block id="creditList" name="PermanentCredit" kw="" fashionId=0 bankcardId=0 start=1 perpage=10 />
+          <table class="table table-striped dataTable no-footer" id="table2" credit="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr credit="row">
+				 <th  style="width: 300px;">主题</th>
+				 <th style="width: 120px;">类型</th>
+				 <th style="width: 120px;">授信/冻结/剩余</th>
+                 <th style="width: 100px;">账单日</th>
+                 <th style="width: 100px;">结账日</th>
+                 <th style="width: 140px;">时间</th>
+                 <th style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$creditList.total" value="0">
+              <tr class="gradeA odd" credit="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="credit" name="creditList.data">
+              <tr class="gradeA odd" credit="row">
+                    <td class="sorting_1">{$credit.title}</td>
+                    <td>
+                    <a href="/permanent/credit_{$credit.channel_identity}.html">
+                    	{$credit.channel.title}
+                    </a>
+                    </td>
+                    <td>{$credit.amount}/{$credit.frozen_amount}/{$credit.available_amount}</td>
+                    <td>{$credit.checkout}</td>
+                    <td>{$credit.statement}</td>
+                    <td>{$credit['lastupdate']|formatdate}</td>
+                    <td>
+                    	<eq name="$credit[status][value]" value="0">
+                        <a class="btn btn-default-alt">禁用</a>
+                        </eq>
+                    	<eq name="$credit[status][value]" value="2">
+                        <a class="btn btn-primary-alt">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/permanent/newcredit_{$credit.identity}.html">修改</a>
+                    	<eq name="$credit[status][value]" value="1">
+                        <a class="btn btn-danger-alt">删除</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/permanent/indebtedness_{$credit.identity}.html">债务</a>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($creditList['total'],$creditList['perpage'],$creditList['start'],'/permanent/credit_'.$_GET['channelId'].'_{page}.html');</php>
+           <div class="dataTables_info" id="table2_info" credit="status" aria-live="polite">Showing {$creditList['start']} to {$creditList['perpage']} of {$creditList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/permanent/credit.js"></script>
+<template file="/footer" />

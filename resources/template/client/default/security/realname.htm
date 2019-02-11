@@ -1,0 +1,88 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">账户安全</h4>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped dataTable no-footer" id="table2" catalog="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalog="row">
+					<th  style="width: 272px;">您当前的账号安全程度</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <tr class="gradeA odd" catalog="row">
+                    <td>登录密码</td>
+                    <td> 安全性高的密码可以使帐号更安全。建议您定期更换密码，设置一个包含字母，符号或数字中至少两项且长度超过6位的密码。</td>
+                    <td>
+                    	已设置 | 修改
+                    </td>
+                 </tr>
+                 <tr class="gradeA odd" catalog="row">
+                    <td>手机绑定</td>
+                    <td>您已绑定了手机138****5702 [您的手机为安全手机，可以找回密码，但不能用于登录]</td>
+                    <td>
+                    	已设置 | 修改
+                    </td>
+                 </tr>
+                 <tr class="gradeA odd" catalog="row">
+                    <td>密保问题</td>
+                    <td>建议您设置三个容易记住，且最不容易被他人获取的问题及答案，更有效保障您的密码安全。</td>
+                    <td>
+                    	已设置 | 修改
+                    </td>
+                 </tr>
+                 <tr class="gradeA odd" catalog="row">
+                    <td>操作保护</td>
+                    <td>在控制台关键操作（如：释放、修改密码等）时，通过 设置保护强度和验证方式 再次确认您的身份，进一步提高账号安全性，有效保护您安全使用云产品。</td>
+                    <td>
+                    	已设置 | 修改
+                    </td>
+                 </tr>
+                 <tr class="gradeA odd" catalog="row">
+                   <td>注销账号</td>
+                   <td>如果您不再使用此账号，可以将其注销。账号成功注销后，其下所有服务、数据及隐私信息将会被删除并将无法恢复。</td>
+                   <td>注销账号</td>
+                 </tr>
+                 </tbody>
+           </table>
+           
+           </div>
+      </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<template file="/footer" />

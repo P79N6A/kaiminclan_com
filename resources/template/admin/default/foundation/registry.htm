@@ -1,0 +1,87 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">设置</h3>
+        </div>
+        <div class="panel-body">
+          <div class="table-responsive">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="table2_length"><label>Show <div class="select2-container" id="s2id_autogen3"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-4">10</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" role="presentation"><b role="presentation"></b></span></a><label for="s2id_autogen4" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" role="button" aria-labelledby="select2-chosen-4" id="s2id_autogen4"><div class="select2-drop select2-display-none">   <div class="select2-search select2-search-hidden select2-offscreen">       <label for="s2id_autogen4_search" class="select2-offscreen"></label>       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" role="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-4" id="s2id_autogen4_search" placeholder="">   </div>   <ul class="select2-results" role="listbox" id="select2-results-4">   </ul></div></div><select name="table2_length" aria-controls="table2" class="select2-offscreen" tabindex="-1" title=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="table2_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="table2"></label></div><table class="table table-striped dataTable no-footer" id="table2" role="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column ascending" style="width: 272px;">交易时间</th><th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 415px;">交易类型</th><th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 400px;">交易金额</th><th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 229px;">余额</th>
+                 <th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 167px;">交易状态</th>
+                 <th class="sorting" tabindex="0" aria-controls="table2" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 167px;">交易备注</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <tr class="gradeA odd" role="row">
+                    <td class="sorting_1">Gecko</td>
+                    <td>Firefox 1.0</td>
+                    <td>Win 98+ / OSX.2+</td>
+                    <td class="center">1.7</td>
+                    <td class="center">A</td>
+                    <td class="center">A</td>
+                 </tr>
+              <tr class="gradeA odd" role="row">
+                    <td class="sorting_1">Gecko</td>
+                    <td>Firefox 1.0</td>
+                    <td>Win 98+ / OSX.2+</td>
+                    <td class="center">1.7</td>
+                    <td class="center">A</td>
+                    <td class="center">A</td>
+                 </tr>
+              <tr class="gradeA odd" role="row">
+                    <td class="sorting_1">Gecko</td>
+                    <td>Firefox 1.0</td>
+                    <td>Win 98+ / OSX.2+</td>
+                    <td class="center">1.7</td>
+                    <td class="center">A</td>
+                    <td class="center">A</td>
+                 </tr>
+              <tr class="gradeA odd" role="row">
+                    <td class="sorting_1">Gecko</td>
+                    <td>Firefox 1.0</td>
+                    <td>Win 98+ / OSX.2+</td>
+                    <td class="center">1.7</td>
+                    <td class="center">A</td>
+                    <td class="center">A</td>
+                 </tr>
+                 </tbody>
+           </table><div class="dataTables_info" id="table2_info" role="status" aria-live="polite">Showing 1 to 10 of 57 entries</div><div class="dataTables_paginate paging_full_numbers" id="table2_paginate"><a class="paginate_button first disabled" aria-controls="table2" data-dt-idx="0" tabindex="0" id="table2_first">First</a><a class="paginate_button previous disabled" aria-controls="table2" data-dt-idx="1" tabindex="0" id="table2_previous">Previous</a><span><a class="paginate_button current" aria-controls="table2" data-dt-idx="2" tabindex="0">1</a><a class="paginate_button " aria-controls="table2" data-dt-idx="3" tabindex="0">2</a><a class="paginate_button " aria-controls="table2" data-dt-idx="4" tabindex="0">3</a><a class="paginate_button " aria-controls="table2" data-dt-idx="5" tabindex="0">4</a><a class="paginate_button " aria-controls="table2" data-dt-idx="6" tabindex="0">5</a><a class="paginate_button " aria-controls="table2" data-dt-idx="7" tabindex="0">6</a></span><a class="paginate_button next" aria-controls="table2" data-dt-idx="8" tabindex="0" id="table2_next">Next</a><a class="paginate_button last" aria-controls="table2" data-dt-idx="9" tabindex="0" id="table2_last">Last</a></div></div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<template file="/footer" />

@@ -1,0 +1,12 @@
+/* CSS Document */
+html,body { background:#ededed; }
+.box { width:1200px; margin:0 auto; }
+
+.menu { width:100px; margin-right:20px;}
+.content { width:720px; padding:20px; margin-right:20px; background:#fff; }
+.content h1 { font-size:36px; line-height:42px; font-weight:bold; text-align:left; }
+.content { line-height:32px; }
+.sidebar { width:260px; background:#fff; padding:0 20px; }
+
+.sidebar ul li { padding:5px 0; }
+.sidebar ul li a { color:#666; }

@@ -1,0 +1,147 @@
+﻿<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+  <ul class="filemanager-options">
+        <li>
+          <div class="ckbox ckbox-default">
+            <input type="checkbox" id="selectall" value="1" />
+            <label for="selectall">Select All</label>
+          </div>
+        </li>
+        <li>
+          <a href="" class="itemopt disabled"><i class="fa fa-envelope-o"></i> Email</a>
+        </li>
+        <li>
+          <a href="" class="itemopt disabled"><i class="fa fa-download"></i> Download</a>
+        </li>
+        <li>
+          <a href="" class="itemopt disabled"><i class="fa fa-pencil"></i> Edit</a>
+        </li>
+        <li>
+          <a href="" class="itemopt disabled"><i class="fa fa-trash-o"></i> Delete</a>
+        </li>
+        <li class="filter-type">
+          Show:
+          <a href="all.html" class="active">All</a>
+          <a href="document.html">Documents</a>
+          <a href="audio.html">Audio</a>
+          <a href="image.html">Images</a>
+          <a href="video.html">Videos</a>
+        </li>
+        
+      </ul>
+        
+      
+      <div class="row">
+        <div class="col-sm-9">
+          <div class="row filemanager">
+            
+            <block id="catalogList" name="ResourcesCatalog" mode=1 />
+            <volist id="catalog" name="catalogList.data">
+            <div class="col-xs-6 col-sm-4 col-md-3 document">
+              <div class="thmb">
+                <div class="ckbox ckbox-default">
+                  <input type="checkbox" id="check1" value="1" />
+                  <label for="check1"></label>
+                </div>
+                <div class="btn-group fm-group">
+                    <button type="button" class="btn btn-default dropdown-toggle fm-toggle" data-toggle="dropdown">
+                      <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu fm-menu" role="menu">
+                      <li><a href="#"><i class="fa fa-share"></i> Share</a></li>
+                      <li><a href="#"><i class="fa fa-envelope-o"></i> Email</a></li>
+                      <li><a href="#"><i class="fa fa-pencil"></i> Edit</a></li>
+                      <li><a href="#"><i class="fa fa-download"></i> Download</a></li>
+                      <li><a href="#"><i class="fa fa-trash-o"></i> Delete</a></li>
+                    </ul>
+                </div><!-- btn-group -->
+                <div class="thmb-prev">
+                  <eq name="$attachment.filetype" value="doc">
+                  <img src="/img/bracket/photos/media-doc.png" class="img-responsive" alt="" />
+                  <else />
+                      <eq name="$attachment.filetype" value="mp3">
+                      <img src="/img/bracket/photos/media-audio.png" class="img-responsive" alt="" />
+                      <else />
+                      <img src="{$attachment.attachUrl}" class="img-responsive" alt="" />
+                      </eq>
+                  </eq>
+                  
+                </div>
+                <h5 class="fm-title"><a href="">{$attachment.filename}</a></h5>
+                <small class="text-muted">{$attachment['dateline']|formatdate}</small>
+              </div><!-- thmb -->
+            </div><!-- col-xs-6 -->
+            </volist>
+            
+            <!-- col-xs-6 -->
+            
+          </div><!-- row -->
+        </div><!-- col-sm-9 -->
+        <div class="col-sm-3">
+          <div class="fm-sidebar">
+            
+            <button class="btn btn-primary btn-block">文件上传</button>
+            
+            <div class="mb30"></div>
+            
+            <h5 class="subtitle">目录 <a href="" class="pull-right">+ 新目录</a></h5>
+            <block id="catalogList" name="ResourcesCatalog" mode=1 />
+            <ul class="folder-list">
+              <volist id="catalog" name="catalogList.data">
+              <li><a href=""><i class="fa fa-folder-o"></i> My Pictures</a></li>
+              </volist>
+            </ul>
+            
+            <div class="mb30"></div>
+            
+            <h5 class="subtitle">Tags</h5>
+            <ul class="tag-list">
+              <li><a href="">Animation</a></li>
+              <li><a href="">Design</a></li>
+              <li><a href="">Trailer</a></li>
+              <li><a href="">Short Film</a></li>
+              <li><a href="">Dubstep</a></li>
+              <li><a href="">Soundtrack</a></li>
+              <li><a href="">Photography</a></li>
+              <li><a href="">Macro</a></li>
+              <li><a href="">Tuturials</a></li>
+              <li><a href="">Documentation</a></li>
+            </ul>
+            
+          </div>
+        </div><!-- col-sm-3 -->
+      </div>
+    </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/jquery.prettyPhoto.js"></script>
+<template file="/footer" />

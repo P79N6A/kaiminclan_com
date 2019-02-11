@@ -1,0 +1,96 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">权限管理</h4>
+        </div>
+        <div class="panel-body">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+		  <block id="platformList" name="PaginationPlatform"  platformId="0" perpage=1 mode=1 />
+		  <block id="catalogueList" name="PaginationCatalogue" platformId="0" perpage="100" mode=1 />
+		  <block id="pageList" name="PaginationPage"  platformId="0" perpage="0" />
+		  <block id="resourceList" name="AuthorityResources"  idtype="0" id=0 />
+          <table class="table table-striped dataTable no-footer" id="table2" role="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr role="row">
+					<th>业务</th>
+					<th colspan="4">页面</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$platformList.total" value="0">
+              <tr class="gradeA odd" role="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="catalogue" name="catalogueList.data">
+              <tr class="gradeA odd" role="row">
+                    <td >
+						<label>
+						<input type="checkbox" class="" data-id="{$catalogue.identity}" />
+						{$catalogue.title}
+						</label>
+					</td>
+              <volist id="page" name="pageList.data">
+              <eq name="$page.catalogue_identity" value="$catalogue.identity">
+                    <td >
+						<label>
+						<input type="checkbox" class="" data-id="{$page.identity}" />
+						{$page.title}
+						</label>
+					</td>
+                 </eq>
+					</volist>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <button id="click_button_cannel" type="button" class="btn btn-default">取消</button>
+				</div>
+			 </div>
+		  </div>
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script type="text/javascript" src="/js/1.0/authority/resources_admin.js"></script>
+<template file="/footer" />

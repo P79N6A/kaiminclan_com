@@ -1,0 +1,28 @@
+<template file="top" />
+<link rel="stylesheet" href="/css/stock/list.css"/>
+
+<title>新闻前线</title>
+</head>
+
+<body>
+<template file="menu" />
+<div class="box">
+	<div class="content">
+    <block id="newsList" name="IntelligenceDocumentation" catalogueId=47 status=0 start=1 perpage=20 />
+    <volist id="news" name="newsList.data">
+    <div class="item">
+    	<a href="{$news.identity}.html" target="_blank">
+    	<h1>{$news.title}</h1>
+        <p>{$news.summary}</p>
+        </a>
+        
+        <ul>
+            <li>
+            时间:{$news['dateline']|fdate}
+            </li>
+        </ul>
+    </div>
+    </volist>
+    </div>
+</div>
+<template file="bottom" />

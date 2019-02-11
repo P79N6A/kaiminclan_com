@@ -1,0 +1,15 @@
+.header { height:0.85rem; overflow:hidden;}
+.header .logo { font-size:28px; font-weight:bold; padding:5px 15px; }
+.header .search { font-size:0.32rem; padding-left:6.133333rem; padding-top:0.133333rem; }
+.header .userinfo { font-size:0.32rem; padding-left:0.333333rem; padding-top:0.133333rem; }
+.header .menu ul { display:none; }
+.header .menu h2 { font-size:36px; padding-right:15px;}
+
+
+
+.footer { background:#f4f4f4; padding:0.586666rem 0.266666rem; }
+.footer h2 { font-size:0.426666rem; }
+.footer ul:after{ content:""; height:0; line-height:0;display:block; visibility:hidden; clear:both}
+.footer ul { padding-bottom:0.1rem; }
+.footer ul li { float:left; width:4.666666rem; padding:10px 0; }
+.footer ul li a { color:#5a5a5a; font-size:0.266666rem; }

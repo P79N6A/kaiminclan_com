@@ -1,0 +1,97 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+	<gt name="$location.demandId" value="0">
+	<block id="demandData" name="RequirementDemand" demandId=0 start=1 perpage=1 />
+    </gt>
+	<div class="contentpanel">
+	<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">需求-新需求</h4>
+        </div>
+          <form id="baseicForm" class="form-horizontal form-bordered">
+		  <input type="hidden" name="demandId" value="{$demandData.data.identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$demandData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <block id="catalogueList" name="RequirementCatalogue" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">类型</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="catalogue_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="catalogueList.data">
+                    <option value="{$catalogue.identity}"<eq name="$demandData['data']['catalogue_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">联系人</label>
+              <div class="col-sm-6">
+                <input type="text" id="settingFormFullname" required value="{$demandData.data.fullname}" placeholder="联系人" class="form-control">
+				<input type="hidden" name="clientete_identity" value="1" />
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">需求</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="content" rows="5">{$demandData.data.content}</textarea>
+              </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="2">{$demandData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/requirement/demand.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+  <!-- rightpanel -->
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/requirement/demand_add.js"></script>
+<template file="/footer" />

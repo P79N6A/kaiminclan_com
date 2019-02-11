@@ -1,0 +1,146 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/investment/newproject.html">新建</a>
+          </div>
+          <h4 class="panel-title">项目管理</h4>
+        </div>
+        <div class="panel-body">
+          <block id="catalogList" name="InvestmentProject" industryId=0 start=1 perpage=10 kw="" />
+			 <div class="row">
+				<form id="filterForm" method="get" >
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<block id="platformList" name="InvestmentCatalog" />
+					  <select id="searchCurrencyId" name="industryId" class="select2" data-placeholder="选择行业">
+						<option value="">--行业--</option>
+						<volist id="platform" name="platformList.data">
+						<option value="{$platform.identity}" <eq name="$location.industryId" value="$platform['identity']">selected="selected"</eq>>{$platform.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$location.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <notempty name="$catalogList['filter']">
+					  <button id="clickButtonFilterReset" type="button" class="btn btn-default">取消</button>
+					  </notempty>
+					</div>
+				</div>
+				</form>
+			 </div>
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer">
+          <table class="table table-striped dataTable no-footer" id="table2" catalog="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalog="row">
+				 <th  style="width: 300px;">编号</th>
+				 <th  style="width: 300px;">主题</th>
+				 <th style="width: 120px;">产业</th>
+                 <th style="width: 100px;">立项时间</th>
+                 <th style="width: 100px;">到期时间</th>
+                 <th style="width: 140px;">时间</th>
+                 <th style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$projectList.total" value="0">
+              <tr class="gradeA odd" catalog="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="project" name="catalogList.data">
+              <tr class="gradeA odd" catalog="row">
+                    <td>{$project.sn}</td>
+                    <td class="sorting_1">{$project.title}</td>
+                    <td>{$project.industry.title}</td>
+                    <td>{$project[approval_date]|fdate}</td>
+                    <td>{$project[expire_date]|fdate}</td>
+                    <td>{$project['lastupdate']|formatdate}</td>
+                    <td>
+                    	<eq name="$catalog[status][value]" value="0">
+                        <a class="btn btn-default-alt click_button_disabled" data-id="{$project.identity}">禁用</a>
+                        </eq>
+                    	<eq name="$catalog[status][value]" value="2">
+                        <a class="btn btn-primary-alt click_button_enabled" data-id="{$project.identity}">启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/investment/newproject_{$project.identity}.html">修改</a>
+                    	<eq name="$catalog[status][value]" value="2">
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$project.identity}">删除</a>
+                        </eq>
+                        <a class="btn btn-primary-alt" href="/investment/cash_{$project.identity}.html">现金分红</a>
+                        <a class="btn btn-default-alt" href="/investment/capital_{$project.identity}.html">送转股本</a>
+                    </td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($projectList['total'],$projectList['perpage'],$projectList['start']);</php>
+           <div class="dataTables_info" id="table2_info" catalog="status" aria-live="polite">Showing {$projectList['start']} to {$projectList['perpage']} of {$projectList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/1.0/investment/project.js"></script>
+<template file="/footer" />

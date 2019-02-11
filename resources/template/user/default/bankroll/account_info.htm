@@ -1,0 +1,139 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<block id="accountData" name="BankrollAccount" start=1 perpage=1 accountId=0 status=-1 />
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">账户管理</h4>
+        </div>
+          <input type="hidden" name="accountId" value="{$accountData.data.identity}" />
+          
+		 <lt name="$location.accountId" value="1">
+          <input type="hidden" id="accountStatus" name="status" value="1" />
+          <else />
+          <input type="hidden" id="accountStatus" name="status" value="{$accountData.data.status.value}" />
+          </lt>
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$accountData.data.title}"  readonly="readonly" placeholder="标题" class="form-control">
+              </div>
+            </div>
+
+            <block id="brokerList" name="PropertyCapital" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">资产</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="capital_identity" data-placeholder="Choose One" required disabled="disabled">
+                    <option value="">选择</option>
+                    <volist id="broker" name="brokerList.data">
+                    <option value="{$broker.identity}"<eq name="$accountData['data']['capital_identity']" value="$broker['identity']"> selected="selected"</eq>>{$broker.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+
+            <block id="brokerList" name="PropertyTheater" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">战区</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="theater_identity" data-placeholder="Choose One" required disabled="disabled">
+                    <option value="">选择</option>
+                    <volist id="broker" name="brokerList.data">
+                    <option value="{$broker.identity}"<eq name="$accountData['data']['theater_identity']" value="$broker['identity']"> selected="selected"</eq>>{$broker.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">识别码</label>
+              <div class="col-sm-6">
+                <input type="text" name="code" required value="{$accountData.data.code}" readonly="readonly" placeholder="识别码" class="form-control">
+              </div>
+            </div>
+
+            <block id="brokerList" name="IntercalateBroker" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">经纪</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="broker_identity" data-placeholder="Choose One" required disabled="disabled">
+                    <option value="">选择</option>
+                    <volist id="broker" name="brokerList.data">
+                    <option value="{$broker.identity}"<eq name="$accountData['data']['broker_identity']" value="$broker['identity']"> selected="selected"</eq>>{$broker.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+
+            <block id="currencyList" name="MechanismCurrency" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">结算货币</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="currency_identity" data-placeholder="Choose One" required disabled="disabled">
+                    <option value="">选择</option>
+                    <volist id="currency" name="currencyList.data">
+                    <option value="{$currency.identity}"<eq name="$accountData['data']['currency_identity']" value="$currency['identity']"> selected="selected"</eq>>{$currency.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+			<div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark" readonly="readonly">{$accountData[data][remark]|doc}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+                  <a class="btn btn-default" href="/bankroll/account.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<template file="/footer" />

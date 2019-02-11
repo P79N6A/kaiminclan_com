@@ -1,0 +1,29 @@
+<div class="logopanel">
+        <h1><span>[</span> 三竹技术 <span>]</span></h1>
+    </div><!-- logopanel -->
+<div class="leftpanelinner">
+
+
+  <h5 class="sidebartitle">目录</h5>
+  <ul class="nav nav-pills nav-stacked nav-bracket">
+	<li><a class="menu_link" href="/dashboard.html"><i class="fa fa-home"></i> <span>首页</span></a></li>
+	
+	<li class="nav-parent"><a class="menu_link" href=""><i class="fa fa-edit"></i> <span>库</span></a>
+	  <ul class="children">
+		<li><a class="menu_link" href="/resources/attachment.html"><i class="fa fa-caret-right"></i> 图片</a></li>
+	  </ul>
+	</li>
+	<block id="menuList" name="ProgramMenu" />
+	<volist id="menu" name="menuList.data">
+	<li class="nav-parent"><a class="menu_link" href=""><i class="fa fa-edit"></i> <span>{$menu.title}</span></a>
+	  <ul class="children">
+		<volist id="nav" name="menu.child">
+		<li><a class="menu_link" href="/{$menu.url}/{$nav.url}.html"><i class="fa fa-caret-right"></i> {$nav.title}</a></li>
+		</volist>
+	  </ul>
+	</li>
+	</volist>
+  </ul>
+
+
+</div>

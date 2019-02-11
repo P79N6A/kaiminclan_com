@@ -1,0 +1,90 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.knowhowId" value="0">
+<block id="knowhowData" name="KnowledgeKnowhow" knowhowId=0 status=-1 perpage=1 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">知识管理-新知识</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="knowhowId" value="{$knowhowData.data.identity}" />
+          <input type="hidden" name="knowhow_identity" value="{$knowhowData.data.knowhow_identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$knowhowData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+
+            <block id="catalogueList" name="KnowledgeCatalogue" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">目录</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="catalogue_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="catalogueList.data">
+                    <option value="{$catalogue.identity}"<eq name="$knowhowData['data']['catalogue_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+			<div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$knowhowData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/knowledge/knowhow.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/knowledge/knowhow_admin.js"></script>
+<template file="/footer" />

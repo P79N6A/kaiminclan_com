@@ -1,0 +1,131 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.brokerId" value="0">
+<block id="brokerData" name="IntercalateBroker" start=1 perpage=1 brokerId=0 />
+</gt>
+
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">经纪管理-经纪编辑</h4>
+        </div>
+          <form id="catalogForm" class="form-horizontal form-bordered">
+          <input type="hidden" name="brokerId" value="{$brokerData.data.identity}" />
+          <input type="hidden" name="broker_identity" value="{$brokerData.data.broker_identity}" />
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">简称</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$brokerData.data.title}" placeholder="识别码" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">全称</label>
+              <div class="col-sm-6">
+                <input type="text" name="fullname" required value="{$brokerData.data.fullname}" placeholder="全称" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">图片</label>
+                <div class="col-sm-6">              	
+					<div class="col-xs-6" id="click_upload_cover">
+					  <div class="panel panel-warning panel-alt widget-today">
+						<img src="{$brokerData.data.cover}" width="150" height="100" />
+						<input type="hidden" name="attachment_identity" value="{$brokerData.data.attachment_identity}" />
+					  </div>
+					</div>
+					<div id="click_upload_cover_error"></div>
+					<div id="click_upload_cover_box"></div>  
+                </div>
+            </div>
+
+            <block id="superviseList" name="IntercalateSupervise" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">监管</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="supervise_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="supervise" name="superviseList.data">
+                    <option value="{$supervise.identity}"<eq name="$brokerData['data']['supervise_identity']" value="$supervise['identity']"> selected="selected"</eq>>{$supervise.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">地区</label>
+              <div class="col-sm-6" id="district-box">
+				<div class="col-sm-3">
+				<select class="select2 continent" name="continent_district_identity" data-value="{$brokerData.data.continent_district_identity}"></select>
+              </div>
+				<div class="col-sm-3">
+				<select class="select2 region" name="region_district_identity" data-value="{$brokerData.data.region_district_identity}"></select>
+              </div>
+				<div class="col-sm-3">
+				<select class="select2 country" name="country_district_identity" data-value="{$brokerData.data.country_district_identity}"></select>
+				</div>
+				</div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">网址</label>
+              <div class="col-sm-6">
+                <input type="text" name="url" required value="{$brokerData.data.url}" placeholder="网址" class="form-control">
+              </div>
+            </div>
+			<div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" rows="5" name="remark">{$brokerData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/intercalate/broker.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/cxselect/jquery.cxselect.min.js"></script>
+<script src="/js/plupload/js/plupload.full.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/intercalate/broker_admin.js"></script>
+<template file="/footer" />

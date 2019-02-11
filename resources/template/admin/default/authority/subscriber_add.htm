@@ -1,0 +1,113 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.subscriberId" value="0">
+<block id="subscriberData" name="AuthoritySubscriber" subscriberId=0 perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">账户与权限-新账户</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="subscriberId" value="{$subscriberData.data.identity}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">昵称</label>
+              <div class="col-sm-6">
+                <input type="text" id="fullname" name="fullname" value="{$subscriberData.data.fullname}" required placeholder="昵称" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">角色</label>
+              <div class="col-sm-6" id="role-box">
+				<div class="col-sm-3">
+				<select class="select2 first" name="first_role_identity" data-value="{$companyData.data.first_role_identity}"></select>
+              </div>
+				<div class="col-sm-3">
+				<select class="select2 second" name="second_role_identity" data-value="{$companyData.data.second_role_identity}"></select>
+              </div>
+				<div class="col-sm-3">
+				<select class="select2 third" name="third_role_identity" data-value="{$companyData.data.third_role_identity}"></select>
+				</div>
+				</div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">账户名称</label>
+              <div class="col-sm-6">
+                <input type="text" name="username" placeholder="账户名称" value="{$subscriberData.data.username}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">手机号码</label>
+              <div class="col-sm-6">
+                <input type="text" name="mobile" placeholder="手机号码" value="{$subscriberData.data.mobile}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">电子邮件</label>
+              <div class="col-sm-6">
+                <input type="text" name="email" placeholder="电子邮件" value="{$subscriberData.data.email}" class="form-control">
+              </div>
+            </div>
+            
+            <div class="form-group">
+				  <label class="col-sm-3 control-label" for="disabledinput">密码</label>
+				  <div class="col-sm-6">
+					 <input type="password" name="password" placeholder="密码" class="form-control">
+				  </div>
+				</div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/authority/subscriber.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/cxselect/jquery.cxselect.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/1.0/authority/subscriber_add.js{__VERSION__}"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

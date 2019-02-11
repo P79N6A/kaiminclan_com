@@ -1,0 +1,103 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">价格管理</h4>
+        </div>
+        <div class="panel-body">
+          <div id="table2_wrapper" class="dataTables_wrapper no-footer"><div class="dataTables_length" id="table2_length"><label>Show <div class="select2-container" id="s2id_autogen3"><a href="javascript:void(0)" class="select2-choice" tabindex="-1">   <span class="select2-chosen" id="select2-chosen-4">10</span><abbr class="select2-search-choice-close"></abbr>   <span class="select2-arrow" catalogue="presentation"><b catalogue="presentation"></b></span></a><label for="s2id_autogen4" class="select2-offscreen"></label><input class="select2-focusser select2-offscreen" type="text" aria-haspopup="true" catalogue="button" aria-labelledby="select2-chosen-4" id="s2id_autogen4"><div class="select2-drop select2-display-none">   <div class="select2-search select2-search-hidden select2-offscreen">       <label for="s2id_autogen4_search" class="select2-offscreen"></label>       <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" catalogue="combobox" aria-expanded="true" aria-autocomplete="list" aria-owns="select2-results-4" id="s2id_autogen4_search" placeholder="">   </div>   <ul class="select2-results" catalogue="listbox" id="select2-results-4">   </ul></div></div><select name="table2_length" aria-controls="table2" class="select2-offscreen" tabindex="-1" title=""><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div><div id="table2_filter" class="dataTables_filter"><label>Search:<input type="search" class="" placeholder="" aria-controls="table2"></label></div>
+          <block id="catalogueList" name="QuotationInvaluable" mode=1 start=1 perpage=10 />
+          <table class="table table-striped dataTable no-footer" id="table2" catalogue="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr catalogue="row">
+				 <th >品种</th>
+				 <th >开盘价</th>
+				 <th >最高价</th>
+				 <th >最低价</th>
+				 <th >收盘价</th>
+                 <th >日期</th>
+                 </tr>
+              </thead>
+              <tbody>
+              <eq name="$catalogueList.total" value="0">
+              <tr class="gradeA odd" catalogue="row">
+                    <td class="dataTables_empty" colspan="5">没有数据</td>
+                 </tr>
+              <else />
+              <volist id="catalogue" name="catalogueList.data">
+              <tr class="gradeA odd" catalogue="row">
+                    <td class="sorting_1">{$catalogue.id}</td>
+                    <td>{$catalogue.open}</td>
+                    <td>{$catalogue.high}</td>
+                    <td>{$catalogue.low}</td>
+                    <td>{$catalogue.close}</td>
+                    <td>{$catalogue.today}</td>
+                 </tr>
+                 </volist>
+                 </eq>
+                 </tbody>
+           </table>
+            <php>$pageData = $this->page($catalogueList['total'],$catalogueList['perpage'],$catalogueList['start']);</php>
+           <div class="dataTables_info" id="table2_info" catalogue="status" aria-live="polite">Showing {$catalogueList['start']} to {$catalogueList['perpage']} of {$catalogueList['total']} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+           
+           </div>
+          </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<template file="/footer" />

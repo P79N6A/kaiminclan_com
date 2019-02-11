@@ -1,0 +1,100 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+	<gt name="$location.capitalId" value="0">
+	<block id="capitalData" name="PropertyCapital" capitalId=0 start=1 perpage=1 />
+    </gt>
+	<div class="contentpanel">
+	<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">主体管理-新主体</h4>
+        </div>
+          <form id="basicForm" class="form-horizontal form-bordered">
+		  <input type="hidden" name="capitalId" value="{$capitalData.data.identity}" />
+		  <gt name="$location.parentId" value="0">
+		  <input type="hidden" value="{$location.parentId}" name="capital_identity" />
+		  </gt>
+        <div class="panel-body panel-body-nopadding">
+          
+            
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" name="title" required value="{$capitalData.data.title}" placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <block id="scaleList" name="PropertyScale" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">类型</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="scale_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="scaleList.data">
+                    <option value="{$catalogue.identity}"<eq name="$capitalData['data']['scale_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <block id="industryList" name="PropertyIndustry" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">行业</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="industry_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="industryList.data">
+                    <option value="{$catalogue.identity}"<eq name="$capitalData['data']['industry_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+                      <div class="form-group">
+              <label class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="remark" rows="5">{$capitalData.data.remark}</textarea>
+              </div>
+            </div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+                  <a class="btn btn-default" href="/property/capital.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+  <!-- rightpanel -->
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/property/capital_add.js"></script>
+<template file="/footer" />

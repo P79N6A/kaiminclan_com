@@ -1,0 +1,110 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.dictionaryId" value="0">
+<block id="applicatoinData" name="FabricationApplication" applicationId=0 status="-1" perpage=1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">应用管理-新应用</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="applicationId" value="{$applicatoinData.data.identity}" />
+						<div class="form-group">
+						  <label class="col-sm-3 control-label">标题</label>
+						  <div class="col-sm-6">
+							<input type="text" name="title" placeholder="标题" value="{$joggleData.data.title}" class="form-control">
+						  </div>
+						</div>
+            
+            <block id="subjectList" name="ProjectSubject" mode=1 />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">项目</label>
+              <div class="col-sm-6">
+                <select class="select2" name="subject_identity" data-placeholder="Choose One">
+                  <option value="">选择</option>
+                  <volist id="subject" name="subjectList.data">
+                    <option value="{$subject.identity}"<eq name="$applicatoinData['data']['subject_identity']" value="$subject['identity']"> selected="selected"</eq>>{$subject.title}</option>
+
+                  </volist>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">架构</label>
+              <div class="col-sm-6">
+                <div class="col-xs-6" id="click_upload_cover">
+                  <div class="panel panel-warning panel-alt widget-today">
+                    <img src="{$brokerData.data.cover}" width="150" height="100" />
+                    <input type="hidden" name="attachment_identity" value="{$platformData.data.attachment_identity}" />
+                  </div>
+                </div>
+                <div id="click_upload_cover_error"></div>
+                <div id="click_upload_cover_box"></div>
+              </div>
+            </div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">介绍</label>
+				<div class="col-sm-6">
+				<textarea class="form-control" rows="10" name="content">{$applicatoinData[data][content]|doc}</textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">备注</label>
+				<div class="col-sm-6">
+				<textarea class="form-control" rows="2" name="remark">{$applicatoinData[data][remark]|doc}</textarea>
+				</div>
+			</div>
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <button type="submit" class="btn btn-primary">确认</button>&nbsp;
+				  <a class="btn btn-default" href="/fabrication/dictionary.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/plupload/js/plupload.full.min.js"></script>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/1.0/fabrication/application_add.js"></script>
+<script type="text/javascript">
+</script>
+<template file="/footer" />

@@ -1,0 +1,118 @@
+<template file="/header" />
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+
+    <template file="/breadcrumb" />
+<gt name="$location.documentationId" value="0">
+<block id="documentationData" name="IntelligenceDocumentation" documentationId=0 perpage=1 status=-1 />
+</gt>
+    <div class="contentpanel">
+<div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">文章管理-新文章</h4>
+        </div>
+        <div class="panel-body panel-body-nopadding">
+          
+          <form id="basicForm" method="post" class="form-horizontal form-bordered">
+            <input type="hidden" name="documentationId" value="{$documentationData.data.identity}" />
+            <input type="hidden" id="basicFormStatus" name="status" value="{$documentationData.data.status}" />
+            <div class="form-group">
+              <label class="col-sm-3 control-label">标题</label>
+              <div class="col-sm-6">
+                <input type="text" id="title" name="title" value="{$documentationData.data.title}" required placeholder="标题" class="form-control">
+              </div>
+            </div>
+            <block id="catalogueList" name="IntelligenceCatalogue" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">栏目/频道</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="catalogue_identity" data-placeholder="Choose One" required>
+                    <option value="">选择</option>
+                    <volist id="catalogue" name="catalogueList.data">
+                    <option value="{$catalogue.identity}"<eq name="$documentationData['data']['catalogue_identity']" value="$catalogue['identity']"> selected="selected"</eq>>{$catalogue.title}</option>
+                    
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            
+            <block id="originateList" name="IntelligenceOriginate" />            
+            <div class="form-group">
+                <label class="col-sm-3 control-label">来源</label>
+                <div class="col-sm-6">
+                  <select class="select2" name="originate_identity" data-placeholder="Choose One">
+                    <option value="">选择</option>
+                    <volist id="originate" name="originateList.data">
+                    <option value="{$originate.identity}"<eq name="$documentationData['data']['originate_identity']" value="$role['identity']"> selected="selected"</eq>>{$originate.title}</option>
+                   
+                    </volist>
+                  </select>
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-3 control-label">摘要</label>
+              <div class="col-sm-6">
+                <textarea class="form-control" name="summary" rows="5">{$documentationData.data.summary}</textarea>
+              </div>
+            </div>
+			<gt name="$location.documentationId" value="0">
+            <block id="documentationContent" name="IntelligenceSubstance" documentationId="$location.documentationId" />     
+			</gt>
+                      <div class="form-group">
+          <textarea id="ckeditor" name="content" placeholder="Enter text here..." class="form-control" rows="10">
+		  <volist id="content" name="documentationContent.data">
+		  {$content.content}
+		  </volist>
+		  </textarea>
+            </div>
+                      
+          
+        </div><!-- panel-body -->
+        
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="col-sm-6 col-sm-offset-3">
+				  <gt name="$location.documentationId" value="0">
+				  <button id="clickButtonRemove" type="button" class="btn btn-danger">删除</button>&nbsp; 
+				  </gt>
+				  <button id="clickButtonSaveDraft" type="submit" class="btn btn-primary">保存</button>&nbsp;
+				  <button id="clickButtonSave" type="submit" class="btn btn-default">保存并启用</button>&nbsp;
+				  <a class="btn btn-default" href="/intelligence/documentation.html">取消</a>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+            
+          </form>
+        
+      </div>
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<script src="/js/select2.min.js"></script>
+<script src="/js/jquery.validate.min.js"></script>
+<script src="/js/ckeditor/ckeditor.js"></script>
+<script src="/js/1.0/intelligence/documentation_admin.js"></script>
+<template file="/footer" />

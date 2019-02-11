@@ -1,0 +1,141 @@
+<template file="/header" />
+<link href="/css/bracket/jquery.datatables.css" rel="stylesheet">
+<!-- Preloader -->
+<div id="preloader">
+    <div id="status"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+
+<section>
+
+  <div class="leftpanel">
+	<template file="/menu" />
+    <!-- leftpanelinner -->
+  </div><!-- leftpanel -->
+
+  <div class="mainpanel">
+
+	<template file="/meminfo" />
+      <!-- header-right -->
+
+    <template file="/breadcrumb" />
+
+    <div class="contentpanel">
+
+     <div class="panel panel-default">
+     	<div class="panel-heading">
+          <div class="panel-btns">
+          	<a class="btn btn-primary" href="/foundation/newplatform.html">新建</a>
+          </div>
+          <h4 class="panel-title">平台</h4>
+          <p>新增、删除并设置网站平台</p>
+        </div>
+		
+        <div class="panel-footer">
+			 <div class="row">
+				<div class="form-group ol-sm-6">
+				  <div class="col-sm-3">
+					<block id="platformList" name="PaginationDomain" />
+					  <select id="searchDomainId" class="select2" data-placeholder="选择平台" required>
+						<option value="">--域名--</option>
+						<volist id="platform" name="platformList.data">
+						<option value="{$platform.identity}">{$platform.code}-{$platform.title}</option>
+						</volist>
+					  </select>
+				  </div>
+				  <div class="col-sm-3">
+					<input type="text" name="kw" placeholder="关键字" value="{$paginationData.data.kw}" class="form-control">
+				  </div>
+				  <div class="col-sm-3">
+					  <button type="submit" class="btn btn-primary">立即搜索</button>&nbsp;
+					  <button type="reset" class="btn btn-default">重置</button>
+					</div>
+				</div>
+			 </div>
+		  </div><!-- panel-footer -->
+        <div class="panel-body">
+          <div class="table-responsive">
+          <table class="table table-striped dataTable no-footer" id="table2" role="grid" aria-describedby="table2_info">
+              <thead>
+                 <tr role="row">
+                 	<th style="width: 272px;">名称</th>
+                    <th style="width: 415px;">主机</th>
+                    <th style="width: 415px;">隶属系统</th>
+                    <th style="width: 115px;">业务</th>
+                    <th style="width: 115px;">页面</th>
+                    <th style="width: 400px;">最后修改</th>
+                   <th style="width: 400px;">操作</th>
+                 </tr>
+              </thead>
+              <tbody>
+			  <block id="platformList" name="PaginationPlatform" start=1 domainId=0 perpage=10 status=-1 />
+			  <volist id="platform" name="platformList.data">
+              <tr class="gradeA odd" role="row">
+                    <td class="sorting_1">{$platform.title}</td>
+                    <td>{$platform.code}</td>
+                    <td>{$platform.domain.title}</td>
+                    <td>{$platform.catalogue_num}</td>
+                    <td>{$platform.pagination_num}</td>
+                    <td class="center">{$platform[dateline]|formatdate}</td>
+                    <td>
+                    	<eq name="$platform.status.value" value="0">
+                        <a class="btn btn-default-alt click_button_disabled" data-id="{$platform.identity}" data-url="/Pagination/PlatformDisable" >禁用</a>
+                        </eq>
+                    	<eq name="$platform.status.value" value="2">
+                        <a class="btn btn-primary-alt click_button_enabled" data-id="{$platform.identity}" data-url="/Pagination/PlatformEnable" >启用</a>
+                        </eq>
+                        <a class="btn btn-success-alt" href="/foundation/newplatform__{$platform.identity}.html">修改</a>
+                        <a class="btn btn-danger-alt click_button_remove" data-id="{$platform.identity}" data-url="/Pagination/PlatformDelete" >删除</a>
+                        <a class="btn btn-primary-alt" href="/foundation/catalogue_{$platform.domain_identity}_{$platform.identity}.html" >业务管理</a>
+                        <a class="btn btn-primary-alt" href="/foundation/pagination_{$domain.domain_identity}_{$platform.identity}.html" >页面管理</a>
+                    </td>
+                 </tr>
+			 </volist>
+                 </tbody>
+           </table>
+		   
+		   
+           
+            <php>$pageData = $this->page($platformList['total'],$platformList['perpage'],$platformList['start']);</php>
+		   <div class="dataTables_info" id="table2_info" role="status" aria-live="polite">Showing {$platformList.start} to {$platformList.perpage} of {$platformList.total} entries</div>
+           <div class="dataTables_paginate paging_full_numbers" id="table2_paginate">
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button first disabled" href="{$pageData['first']['url']}">First</a>
+            </gt>
+                <gt name="pageData['prev']['value']" value="0">
+               <a class="paginate_button previous disabled" href="{$pageData['prev']['url']}">Previous</a>
+               </gt>
+           <span>
+             <volist id="row" name="pageData['list']">
+                        <php> if($row['hovered']!=0){</php>
+               <a class="paginate_button current" href="{$row.url}">{$row.value}</a>
+                        <php>}else{</php>
+               <a class="paginate_button" href="{$row.url}">{$row.value}</a>
+                        <php>}</php>
+                </volist>
+           </span>
+            <gt name="$pageData['next']['value']" value="0">
+               <a class="paginate_button next" href="{$pageData['next']['url']}">Next</a>
+               </gt>
+            <gt name="$pageData['last']['value']" value="0">
+               <a class="paginate_button last" href="{$pageData['last']['url']}">Last</a>
+               </gt>
+           </div>
+		   </div>
+		   </div><!-- table-responsive -->
+          
+        </div><!-- panel-body -->
+      </div>
+
+      
+
+    </div><!-- contentpanel -->
+
+  </div><!-- mainpanel -->
+
+  <!-- rightpanel -->
+
+
+</section>
+<input type="hidden" id="click_form_hash" value="{__HASH__}" />
+<script type="text/javascript" src="/js/1.0/foundation/platform_admin.js"></script>
+<template file="/footer" />
